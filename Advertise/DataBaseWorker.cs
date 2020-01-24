@@ -1,0 +1,126 @@
+﻿using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+namespace Advertise
+{
+    /// <summary>
+    /// Представляет сущность подключаемой базы данных и интерфейс работы с ней
+    /// </summary>
+    public class DataBaseWorker
+    {
+        /// <summary>
+        /// Экземпляр подключения базы данных
+        /// </summary>
+        private MySqlConnection connection;
+        /// <summary>
+        /// Экземпляр подключения базы данных
+        /// </summary>
+        public string ConnectionString
+        {
+            get
+            {
+                return connection.ConnectionString;
+            }
+            set
+            {
+                connection.ConnectionString = value;
+            }
+        }
+        /// <summary>
+        /// Конструктор подключения к базе данных
+        /// </summary>
+        /// <param name="ConnectionString">Строка подключения к базе данных</param>
+        public DataBaseWorker(string ConnectionString)
+        {
+            connection = new MySqlConnection(ConnectionString);
+        }
+        /// <summary>
+        /// Функция выполения запроса к базе данных
+        /// </summary>
+        /// <param name="query">Строка запроса к базе данных</param>
+        /// <returns>Возвращает таблицу с результатом запроса</returns>
+        /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
+        public DataTable MakeQuery(string query)
+        {
+            DataTable table = new DataTable();
+            using (MySqlDataAdapter sql = new MySqlDataAdapter(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    sql.Fill(table);
+                }
+                catch (MySqlException MySqlException)
+                {
+                    throw new Exception(MySqlException.Message + "\nЗапрос:\n" + query);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return table;
+        }
+        /// <summary>
+        /// Функция выполения команды к базе данных
+        /// </summary>
+        /// <param name="query">Строка клманды к базе данных</param>
+        /// <exception cref="System.Exception">Ошибка команды, при её наличии</exception>
+        public void ExecuteQuery(string query)
+        {
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (MySqlException MySqlException)
+                {
+                    throw new Exception(MySqlException.Message + "\nЗапрос:\n" + query);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        /// <summary>
+        /// Функция выполения команды к базе данных
+        /// </summary>
+        /// <param name="query">Строка клманды к базе данных</param>
+        /// <exception cref="System.Exception">Ошибка команды, при её наличии</exception>
+        public bool CheckConnection()
+        {
+            bool isWorking = true;
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception e)
+            {
+                isWorking = false;
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isWorking;
+        }
+        /// <summary>
+        /// Возвращает таблицу из базы данных в виде DataTable с содержимым таблицы
+        /// </summary>
+        /// <param name="TableName">Имя таблицы для выборки</param>
+        /// <returns>Экземпяр DataTable с содержимым таблицы</returns>
+        public DataTable SelectTable(string TableName)
+        {
+            return MakeQuery($"SELECT * FROM `{TableName}`");
+        }
+    }
+}

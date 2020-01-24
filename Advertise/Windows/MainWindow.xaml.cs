@@ -10,19 +10,37 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Advertise
+using System.Diagnostics;
+
+namespace Advertise.Windows
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private DataBaseSynchronizer DB;
+        public MainWindow(DataBaseSynchronizer dataBaseSynchronizer)
         {
             InitializeComponent();
+            DB = dataBaseSynchronizer;
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                grid.ItemsSource = DB.SelectTable("source");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
+
 }
