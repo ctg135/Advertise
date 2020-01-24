@@ -29,20 +29,44 @@ namespace Advertise
         {
             DB = dataBaseWorker;
         }
-        public IEnumerable<object> GetModelAsArr(string Model)
+        /// <summary>
+        /// Получает словарь типа { "Имя таблицы в БД", "Имя таблицы на русском" }
+        /// </summary>
+        /// <returns>Словарь типа { "Имя таблицы в БД", "Имя таблицы на русском" }</returns>
+        /// /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
+        public Dictionary<string, string> GetTableNames()
         {
-            switch (Model.ToLower())
+            Dictionary<string, string> tableNames = new Dictionary<string, string>();
+            foreach (DataRow row in DB.MakeQuery("SHOW TABLES").Rows)
             {
-                case "source":
-                    return new List<Source>();
+                tableNames.Add(row[0].ToString(), string.Empty);
             }
-            return null;
+            tableNames["clients"] = "Клиенты";
+            tableNames["source"] = "Источники";
+            tableNames["investments"] = "Вложения";
+            tableNames["viewsadd"] = "Просмотры";
+            return tableNames;
         }
         /// <summary>
-        /// Возвращает содержимое таблицы из базы данных в виде IEnumerable<object>
+        /// Получает словарь типа { "Имя таблицы на русском", "Имя таблицы в БД" }
+        /// </summary>
+        /// <returns>Словарь с парами типа { "Имя таблицы на русском", "Имя таблицы в БД" }</returns>
+        /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
+        public Dictionary<string, string> GetTableNamesReversed()
+        {
+            Dictionary<string, string> reversed = new Dictionary<string, string>();
+            foreach(KeyValuePair<string, string> pair in GetTableNames())
+            {
+                reversed.Add(pair.Value, pair.Key);
+            }
+            return reversed;
+        }
+        /// <summary>
+        /// Возвращает содержимое таблицы из базы данных в виде IEnumerable соответсвующей модели
         /// </summary>
         /// <param name="TableName">Имя таблицы для выборки</param>
-        /// <returns>IEnumerable<object> с соответсвующей моделью и содержимым таблицы</returns>
+        /// <returns>IEnumerable с соответсвующей моделью и содержимым таблицы</returns>
+        /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
         public IEnumerable<object> SelectTable(string TableName)
         {
             switch (TableName.ToLower())
@@ -53,14 +77,61 @@ namespace Advertise
                     {
                         sources.Add(new Source() 
                         { 
-                            Id = row.ItemArray[0].ToString(), 
-                            Name = row.ItemArray[1].ToString() 
+                            Id = row["Id"].ToString(),
+                            Title = row["Title"].ToString()                            
                         }
                         );
                     }
                     return sources;
-            }
+                case "investments":
+                    List<Investment> invesments = new List<Investment>();
+                    foreach(DataRow row in DB.SelectTable(TableName).Rows)
+                    {
+                        invesments.Add(new Investment() 
+                        { 
+                            Id = row["Id"].ToString(),
+                            Source = row["Source"].ToString(),
+                            Amount = row["Amount"].ToString(),
+                            Month = row["Month"].ToString(),
+                            Year = row["Year"].ToString()
+                        }
+                        );
+                    }
+                    return invesments;
+                case "clients":
+                    List<Client> clients = new List<Client>();
+                    foreach(DataRow row in DB.SelectTable(TableName).Rows)
+                    {
+                        DateTime date = (DateTime)row["Date"];
+                        clients.Add(new Client
+                        {
+                            Id = row["Id"].ToString(),
+                            Name = row["Name"].ToString(),
+                            Source = row["Source"].ToString(),
+                            Date = date.ToString("d"),
+                            Time = row["Time"].ToString(),
+                            Profit = row["Profit"].ToString(),
+                        }
+                        );
+                    }
+                    return clients;
+                case "viewsadd":
+                    List<View> views = new List<View>();
+                    foreach (DataRow row in DB.SelectTable(TableName).Rows)
+                    {
+                        DateTime date = (DateTime)row["Date"];
+                        views.Add(new View
+                        {
+                            Id = row["Id"].ToString(),
+                            Source = row["Source"].ToString(),
+                            Date = date.ToString("d"),
+                            Time = row["Time"].ToString(),
+                        }
+                        );
+                    }
+                    return views;
 
+            }
             return null;
         }
         

@@ -118,6 +118,7 @@ namespace Advertise
         /// </summary>
         /// <param name="TableName">Имя таблицы для выборки</param>
         /// <returns>Экземпяр DataTable с содержимым таблицы</returns>
+        /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
         public DataTable SelectTable(string TableName)
         {
             return MakeQuery($"SELECT * FROM `{TableName}`");

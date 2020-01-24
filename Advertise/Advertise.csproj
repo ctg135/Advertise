@@ -88,7 +88,10 @@
     </Compile>
     <Compile Include="DataBaseSynchronizer.cs" />
     <Compile Include="DataBaseWorker.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Investment.cs" />
     <Compile Include="Models\Source.cs" />
+    <Compile Include="Models\View.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

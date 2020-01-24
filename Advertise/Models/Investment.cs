@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
-    /// <summary>
-    /// Модель данных для таблицы `source`
-    /// </summary>
-    public class Source
+    public class Investment
     {
         public string Id { get; set; }
-        public string Title { get; set; }
+        public string Source { get; set; }
+        public string Amount { get; set; }
+        public string Month { get; set; }
+        public string Year { get; set; }
     }
 }

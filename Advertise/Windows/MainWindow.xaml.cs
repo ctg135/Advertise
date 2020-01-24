@@ -26,20 +26,26 @@ namespace Advertise.Windows
         {
             InitializeComponent();
             DB = dataBaseSynchronizer;
-            Loaded += MainWindow_Loaded;
+            TableSelector.ItemsSource = DB.GetTableNames().Values;
+            TableSelector.SelectionChanged += TableSelector_SelectionChanged;
         }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetUpTable(e.AddedItems[0].ToString());
+        }
+        public void SetUpTable(string TableName)
         {
             try
             {
-                grid.ItemsSource = DB.SelectTable("source");
+                if (!string.IsNullOrEmpty(TableName))
+                {
+                    grid.ItemsSource = DB.SelectTable(DB.GetTableNamesReversed()[TableName]);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
     }
 
