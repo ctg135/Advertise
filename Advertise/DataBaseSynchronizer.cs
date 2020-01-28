@@ -39,7 +39,7 @@ namespace Advertise
             Dictionary<string, string> tableNames = new Dictionary<string, string>();
             foreach (DataRow row in DB.MakeQuery("SHOW TABLES").Rows)
             {
-                tableNames.Add(row[0].ToString(), string.Empty);
+                tableNames.Add(row[0].ToString(), row[0].ToString());
             }
             tableNames["clients"] = "Клиенты";
             tableNames["source"] = "Источники";
@@ -133,6 +133,44 @@ namespace Advertise
 
             }
             return null;
+        }
+        /// <summary> ####
+        /// Функция для получения русских названий столбцов таблицы
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns>Словарь типа { Поле - Название }</returns>
+        public Dictionary<string, string> ColumnNames(string tableName)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            switch(tableName)
+            {
+                case "source":
+                    result.Add("Id", "Идентификатор");
+                    result.Add("Title", "Название");
+                    break;
+                case "investments":
+                    result.Add("Id", "Идентификатор");
+                    result.Add("Source", "Источник");
+                    result.Add("Amount", "Размер вложения");
+                    result.Add("Month", "Месяц вложения");
+                    result.Add("Year", "Год вложения");
+                    break;
+                case "clients":
+                    result.Add("Id", "Идентификатор");
+                    result.Add("Name", "Имя клиента");
+                    result.Add("Source", "Источник");
+                    result.Add("Date", "Дата покупки");
+                    result.Add("Time", "Время покупки");
+                    result.Add("Profit", "Время покупки");
+                    break;
+                case "viewsadd":
+                    result.Add("Id", "Идентификатор");
+                    result.Add("Source", "Источник");
+                    result.Add("Date", "Дата просмотра");
+                    result.Add("Time", "Время просмотра");
+                    break;
+            }
+            return result;
         }
         
     }
