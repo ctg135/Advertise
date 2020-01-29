@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Diagnostics;
+
 namespace Advertise.Windows
 {
     /// <summary>
@@ -23,14 +25,20 @@ namespace Advertise.Windows
         /// Экземпляр для работы с базой данных "Advertise"
         /// </summary>
         private DataBaseSynchronizer DB;
+        /// <summary>
+        /// Список имен таблиц базы данных на русском
+        /// </summary>
         private Dictionary<string, string> TableNames;
+        /// <summary>
+        /// Список столбцов таблиц на русском
+        /// </summary>
+        private Dictionary<string, string> CurrentFields;
         public MainWindow(DataBaseSynchronizer dataBaseSynchronizer)
         {
             InitializeComponent();
             DB = dataBaseSynchronizer;
             TableNames = DB.GetTableNamesReversed();
             TableSelector.ItemsSource = DB.GetTableNames().Values;
-            TableSelector.SelectionChanged += TableSelector_SelectionChanged;
         }
         /// <summary>
         /// Обработчик события выбор названия таблицы
@@ -41,7 +49,6 @@ namespace Advertise.Windows
         {
             SetUpTable(e.AddedItems[0].ToString());
         }
-
         /// <summary>
         /// Функция для устаовки таблицы данных
         /// </summary>
@@ -53,15 +60,17 @@ namespace Advertise.Windows
                 if (!string.IsNullOrEmpty(TableName))
                 {
                     grid.ItemsSource = DB.SelectTable(TableNames[TableName]);
+                    SetUpTableNames(TableName);
+                    CurrentFields = new Dictionary<string, string>();
+                    CurrentFields = DB.ColumnNamesReversed(TableNames[TableName]);
                 }
-                SetUpTableNames(TableName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        /// <summary> #####
+        /// <summary>
         /// Функция для установки русских столбцов
         /// </summary>
         /// <param name="TableName">Имя таблицы в базе данных</param>
@@ -71,6 +80,28 @@ namespace Advertise.Windows
             foreach(var col in grid.Columns)
             {
                 col.Header = names[col.Header.ToString()];
+            }
+        }        
+        /// <summary>
+        /// Функция-обработчик измененения значения ячейки
+        /// </summary>
+        /// <param name="sender">Отправитель сообщения</param>
+        /// <param name="e">Аргументы события</param>
+        private void grid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                DB.UpdateTable(
+                    TableNames[TableSelector.Text], 
+                    ((Models.IModel)grid.Items[e.Row.GetIndex()]).Id, 
+                    CurrentFields[e.Column.Header.ToString()], 
+                    (e.EditingElement as TextBox).Text
+                );
+            }
+            catch(Exception ex)
+            {
+                e.Cancel = true;
+                MessageBox.Show(ex.Message);
             }
         }
     }

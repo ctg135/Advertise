@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
+using System.Diagnostics;
+
 namespace Advertise
 {
     /// <summary>
@@ -122,6 +124,23 @@ namespace Advertise
         public DataTable SelectTable(string TableName)
         {
             return MakeQuery($"SELECT * FROM `{TableName}`");
+        }
+        /// <summary>
+        /// Функция для изменения записи в базе данных
+        /// </summary>
+        /// <param name="TableName">Имя таблицы</param>
+        /// <param name="Id">Идентификатор записи</param>
+        /// <param name="newValues">Словарь с новыми значениями типа { Поле - Новое значение }</param>
+        public void UpdateTable(string TableName, string Id, Dictionary<string, string> newValues)
+        {
+            string query = $"UPDATE `{TableName}` SET";
+            foreach(var pair in newValues)
+            {
+                query += $"\n`{pair.Key}` = '{pair.Value}'";
+            }
+            query += $"\nWHERE `Id` = {Id}";
+            Debug.WriteLine(query);
+            ExecuteQuery(query);
         }
     }
 }

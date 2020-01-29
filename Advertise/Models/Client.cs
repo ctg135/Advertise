@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
-    public class Client
+    public class Client : IModel
     {
         public string Id { get; set; }
         public string Name { get; set; }

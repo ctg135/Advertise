@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
-    public class Investment
+    public class Investment : IModel
     {
         public string Id { get; set; }
         public string Source { get; set; }

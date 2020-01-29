@@ -134,10 +134,10 @@ namespace Advertise
             }
             return null;
         }
-        /// <summary> ####
+        /// <summary>
         /// Функция для получения русских названий столбцов таблицы
         /// </summary>
-        /// <param name="tableName"></param>
+        /// <param name="tableName">Имя таблицы</param>
         /// <returns>Словарь типа { Поле - Название }</returns>
         public Dictionary<string, string> ColumnNames(string tableName)
         {
@@ -161,7 +161,7 @@ namespace Advertise
                     result.Add("Source", "Источник");
                     result.Add("Date", "Дата покупки");
                     result.Add("Time", "Время покупки");
-                    result.Add("Profit", "Время покупки");
+                    result.Add("Profit", "Прибыль");
                     break;
                 case "viewsadd":
                     result.Add("Id", "Идентификатор");
@@ -172,6 +172,32 @@ namespace Advertise
             }
             return result;
         }
-        
+        /// <summary>
+        /// Функция для получения названий столбцов таблицы
+        /// </summary>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <returns>Словарь типа { Название - Поле }</returns>
+        public Dictionary<string, string> ColumnNamesReversed(string tableName)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            foreach(var pair in ColumnNames(tableName))
+            {
+                result.Add(pair.Value, pair.Key);
+            }
+            return result;
+        }
+        /// <summary>
+        /// Функция для изменения таблицы в базе данных
+        /// </summary>
+        /// <param name="TableName">Имя таблицы</param>
+        /// <param name="Id">Идентификатор записи</param>
+        /// <param name="Column">Столбец с измененным значением</param>
+        /// <param name="NewValue">Новое значение ячейки</param>
+        public void UpdateTable(string TableName,  string Id, string Column, string NewValue) // ВСАНДАЛЬ СЮДА АЙДИ
+        {
+            DB.UpdateTable(TableName, Id, new Dictionary<string, string>() { { Column, NewValue } });
+        }
+
+
     }
 }

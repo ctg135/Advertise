@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
-    public class View
+    public class View : IModel
     {
         public string Id { get; set; }
         public string Source { get; set; }

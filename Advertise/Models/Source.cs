@@ -9,7 +9,7 @@ namespace Advertise.Models
     /// <summary>
     /// Модель данных для таблицы `source`
     /// </summary>
-    public class Source
+    public class Source : IModel
     {
         public string Id { get; set; }
         public string Title { get; set; }

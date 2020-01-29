@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="276" Margin="324,62,0,0" VerticalAlignment="Top" Width="417"/>
-        <ComboBox x:Name="TableSelector"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="grid"
+                  HorizontalAlignment="Left" Height="276" Margin="324,62,0,0" VerticalAlignment="Top" Width="417"
+                  CanUserAddRows="False"
+                  CellEditEnding="grid_CellEditEnding"
+                  />
+        <ComboBox x:Name="TableSelector"
+                  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120"
+                  SelectionChanged="TableSelector_SelectionChanged"
+                  />
     </Grid>
 </Window>
