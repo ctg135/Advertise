@@ -91,7 +91,7 @@ namespace Advertise.Windows
             {
                 DB.UpdateTable(
                     TableNames[TableSelector.Text], 
-                    ((Models.IModel)grid.Items[e.Row.GetIndex()]).Id, 
+                    ((Models.IModel)grid.Items[e.Row.GetIndex()]).Id.ToString(), 
                     CurrentFields[e.Column.Header.ToString()], 
                     (e.EditingElement as TextBox).Text
                 );
@@ -116,7 +116,7 @@ namespace Advertise.Windows
             List<string> DeletingID = new List<string>();
             foreach (var row in grid.SelectedItems)
             {
-                DeletingID.Add(((Models.IModel)row).Id);
+                DeletingID.Add(((Models.IModel)row).Id.ToString());
             }
             DB.DeleteSome(TableNames[TableSelector.Text], DeletingID);
             SetUpTable(TableSelector.Text);

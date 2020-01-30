@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
+    /// <summary>
+    /// Представляет универсальную модель таблицы
+    /// </summary>
     public interface IModel
     {
-        string Id { get; set; }
+        int Id { get; set; }
     }
 }

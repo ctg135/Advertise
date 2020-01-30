@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
+    /// <summary>
+    /// Модель для таблицы "Просмотры"
+    /// </summary>
     public class View : IModel
     {
-        public string Id { get; set; }
-        public string Source { get; set; }
+        public int Id { get; set; }
+        public int Source { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
     }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Advertise.Models
 {
     /// <summary>
-    /// Модель данных для таблицы `source`
+    /// Модель данных для таблицы "Источники"
     /// </summary>
     public class Source : IModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
     }
 }

@@ -74,7 +74,7 @@ namespace Advertise
                     {
                         sources.Add(new Source() 
                         { 
-                            Id = row["Id"].ToString(),
+                            Id = int.Parse(row["Id"].ToString()),
                             Title = row["Title"].ToString()                            
                         }
                         );
@@ -86,11 +86,11 @@ namespace Advertise
                     {
                         invesments.Add(new Investment() 
                         { 
-                            Id = row["Id"].ToString(),
-                            Source = row["Source"].ToString(),
-                            Amount = row["Amount"].ToString(),
-                            Month = row["Month"].ToString(),
-                            Year = row["Year"].ToString()
+                            Id = int.Parse(row["Id"].ToString()),
+                            Source = int.Parse(row["Source"].ToString()),
+                            Amount = int.Parse(row["Amount"].ToString()),
+                            Month = int.Parse(row["Month"].ToString()),
+                            Year = int.Parse(row["Year"].ToString())
                         }
                         );
                     }
@@ -102,12 +102,12 @@ namespace Advertise
                         DateTime date = (DateTime)row["Date"];
                         clients.Add(new Client
                         {
-                            Id = row["Id"].ToString(),
+                            Id = int.Parse(row["Id"].ToString()),
                             Name = row["Name"].ToString(),
-                            Source = row["Source"].ToString(),
+                            Source = int.Parse(row["Source"].ToString()),
                             Date = date.ToString("d"),
                             Time = row["Time"].ToString(),
-                            Profit = row["Profit"].ToString(),
+                            Profit = int.Parse(row["Profit"].ToString()),
                         }
                         );
                     }
@@ -119,8 +119,8 @@ namespace Advertise
                         DateTime date = (DateTime)row["Date"];
                         views.Add(new View
                         {
-                            Id = row["Id"].ToString(),
-                            Source = row["Source"].ToString(),
+                            Id = int.Parse(row["Id"].ToString()),
+                            Source = int.Parse(row["Source"].ToString()),
                             Date = date.ToString("d"),
                             Time = row["Time"].ToString(),
                         }

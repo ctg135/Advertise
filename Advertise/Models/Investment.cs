@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
+    /// <summary>
+    /// Модель таблицы "Вложения"
+    /// </summary>
     public class Investment : IModel
     {
-        public string Id { get; set; }
-        public string Source { get; set; }
-        public string Amount { get; set; }
-        public string Month { get; set; }
-        public string Year { get; set; }
+        public int Id { get; set; }
+        public int Source { get; set; }
+        public int Amount { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
     }
 }

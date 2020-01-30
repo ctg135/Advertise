@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Advertise.Models
 {
+    /// <summary>
+    /// Модель таблицы "Клиенты"
+    /// </summary>
     public class Client : IModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Source { get; set; }
+        public int Source { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
-        public string Profit { get; set; }
+        public int Profit { get; set; }
     }
 }
