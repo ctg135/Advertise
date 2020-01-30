@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-using System.Diagnostics;
-
 namespace Advertise
 {
     /// <summary>
@@ -139,7 +137,17 @@ namespace Advertise
                 query += $"\n`{pair.Key}` = '{pair.Value}'";
             }
             query += $"\nWHERE `Id` = {Id}";
-            Debug.WriteLine(query);
+            ExecuteQuery(query);
+        }
+        public void Delete(string TableName, IEnumerable<string> Ids)
+        {
+            string query = $"DELETE FROM `{TableName}` WHERE `Id` IN (";
+            foreach (string id in Ids)
+            {
+                query += $"'{id}',";
+            }
+            query = query.Remove(query.Length - 1, 1);
+            query += ")";
             ExecuteQuery(query);
         }
     }

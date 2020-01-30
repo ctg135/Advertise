@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 
 using Advertise.Models;
-
-using System.Diagnostics;
-
 namespace Advertise
 {
     /// <summary>
@@ -193,11 +190,11 @@ namespace Advertise
         /// <param name="Id">Идентификатор записи</param>
         /// <param name="Column">Столбец с измененным значением</param>
         /// <param name="NewValue">Новое значение ячейки</param>
-        public void UpdateTable(string TableName,  string Id, string Column, string NewValue) // ВСАНДАЛЬ СЮДА АЙДИ
+        public void UpdateTable(string TableName,  string Id, string Column, string NewValue)
         {
             DB.UpdateTable(TableName, Id, new Dictionary<string, string>() { { Column, NewValue } });
         }
-
+        public void DeleteSome(string TableName, IEnumerable<string> Ids) => DB.Delete(TableName, Ids);
 
     }
 }

@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using System.Diagnostics;
-
 namespace Advertise.Windows
 {
     /// <summary>
@@ -103,6 +101,25 @@ namespace Advertise.Windows
                 e.Cancel = true;
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void grid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            ButtonDelete.IsEnabled = grid.SelectedCells.Count > 0;
+        }
+        /// <summary>
+        /// Функция-обработчик нажатия на кнопку удаления выбранных записей
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Параметры события</param>
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> DeletingID = new List<string>();
+            foreach (var row in grid.SelectedItems)
+            {
+                DeletingID.Add(((Models.IModel)row).Id);
+            }
+            DB.DeleteSome(TableNames[TableSelector.Text], DeletingID);
+            SetUpTable(TableSelector.Text);
         }
     }
 
