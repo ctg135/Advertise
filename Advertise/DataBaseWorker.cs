@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
+using System.Diagnostics;
+
 namespace Advertise
 {
     /// <summary>
@@ -139,12 +141,39 @@ namespace Advertise
             query += $"\nWHERE `Id` = {Id}";
             ExecuteQuery(query);
         }
+        /// <summary>
+        /// Удаляет записи из базы данных
+        /// </summary>
+        /// <param name="TableName">Название таблицы</param>
+        /// <param name="Ids">Список идентификаторов</param>
         public void Delete(string TableName, IEnumerable<string> Ids)
         {
             string query = $"DELETE FROM `{TableName}` WHERE `Id` IN (";
             foreach (string id in Ids)
             {
                 query += $"'{id}',";
+            }
+            query = query.Remove(query.Length - 1, 1);
+            query += ")";
+            ExecuteQuery(query);
+        }
+        /// <summary>
+        /// Вставляет записи в таблицу базы данных
+        /// </summary>
+        /// <param name="TableName">Название таблицы</param>
+        /// <param name="newValues">Словарь полей типа "Поле" - "Значение"</param>
+        public void Insert(string TableName, Dictionary<string, string> newValues)
+        {
+            string query = $"INSERT INTO `{TableName}`\n (";
+            foreach(string column in newValues.Keys)
+            {
+                query += $"`{column}`,";
+            }
+            query = query.Remove(query.Length - 1, 1);
+            query += ")\n VALUES (";
+            foreach(string value in newValues.Values)
+            {
+                query += $"'{value}',";
             }
             query = query.Remove(query.Length - 1, 1);
             query += ")";

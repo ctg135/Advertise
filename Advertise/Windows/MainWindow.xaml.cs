@@ -39,18 +39,9 @@ namespace Advertise.Windows
             TableSelector.ItemsSource = DB.GetTableNames().Values;
         }
         /// <summary>
-        /// Обработчик события выбор названия таблицы
-        /// </summary>
-        /// <param name="sender">Объект-отправитель</param>
-        /// <param name="e">Аргументы события</param>
-        private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SetUpTable(e.AddedItems[0].ToString());
-        }
-        /// <summary>
         /// Функция для устаовки таблицы данных
         /// </summary>
-        /// <param name="TableName">Имя таблицы в базе данных</param>
+        /// <param name="TableName">Имя таблицы на русском</param>
         public void SetUpTable(string TableName)
         {
             try
@@ -58,9 +49,6 @@ namespace Advertise.Windows
                 if (!string.IsNullOrEmpty(TableName))
                 {
                     grid.ItemsSource = DB.SelectTable(TableNames[TableName]);
-                    SetUpTableNames(TableName);
-                    CurrentFields = new Dictionary<string, string>();
-                    CurrentFields = DB.ColumnNamesReversed(TableNames[TableName]);
                 }
             }
             catch (Exception ex)
@@ -74,12 +62,26 @@ namespace Advertise.Windows
         /// <param name="TableName">Имя таблицы в базе данных</param>
         public void SetUpTableNames(string TableName)
         {
-            var names = DB.ColumnNames(TableNames[TableName]);
-            foreach(var col in grid.Columns)
+            var names = DB.ColumnNames(TableName);
+            foreach (var col in grid.Columns)
             {
                 col.Header = names[col.Header.ToString()];
             }
-        }        
+        }
+        /// <summary>
+        /// Обработчик события выбора таблицы
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы события</param>
+        private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetUpTable(e.AddedItems[0].ToString());
+            SetUpTableNames(TableNames[e.AddedItems[0].ToString()]);
+            CurrentFields = new Dictionary<string, string>();
+            CurrentFields = DB.ColumnNamesReversed(TableNames[e.AddedItems[0].ToString()]);
+            ButtonAdd.IsEnabled = e.AddedItems.Count > 0;
+        }
+                
         /// <summary>
         /// Функция-обработчик измененения значения ячейки
         /// </summary>
@@ -102,6 +104,11 @@ namespace Advertise.Windows
                 MessageBox.Show(ex.Message);
             }
         }
+        /// <summary>
+        /// Функция-обработчик события выбранной таблицы
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Параметры события</param>
         private void grid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             ButtonDelete.IsEnabled = grid.SelectedCells.Count > 0;
@@ -120,6 +127,15 @@ namespace Advertise.Windows
             }
             DB.DeleteSome(TableNames[TableSelector.Text], DeletingID);
             SetUpTable(TableSelector.Text);
+        }
+        /// <summary>
+        /// Обработчик события наатия на кнопку доабления записей
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Параметры события</param>
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

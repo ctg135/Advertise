@@ -23,5 +23,10 @@
                 VerticalAlignment="Top" Width="176" Height="20"
                 IsEnabled="False"
                 />
+        <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click"
+                Content="Добавить запись" HorizontalAlignment="Left" 
+                Margin="10,84,0,0" VerticalAlignment="Top" Width="176"
+                IsEnabled="False"
+                />
     </Grid>
 </Window>

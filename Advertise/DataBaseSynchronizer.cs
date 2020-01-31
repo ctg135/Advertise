@@ -194,7 +194,17 @@ namespace Advertise
         {
             DB.UpdateTable(TableName, Id, new Dictionary<string, string>() { { Column, NewValue } });
         }
+        /// <summary>
+        /// Удаляет поля из базы данных
+        /// </summary>
+        /// <param name="TableName">Имя таблицы</param>
+        /// <param name="Ids">Идентификаторы записей</param>
         public void DeleteSome(string TableName, IEnumerable<string> Ids) => DB.Delete(TableName, Ids);
-
+        /// <summary>
+        /// Вставляет записи в таблицу базы данных
+        /// </summary>
+        /// <param name="TableName">Название таблицы</param>
+        /// <param name="newValues">Словарь полей типа "Поле" - "Значение"</param>
+        public void Insert(string TableName, Dictionary<string, string> NewValues) => DB.Insert(TableName, NewValues);
     }
 }
