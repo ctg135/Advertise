@@ -129,13 +129,22 @@ namespace Advertise.Windows
             SetUpTable(TableSelector.Text);
         }
         /// <summary>
-        /// Обработчик события наатия на кнопку доабления записей
+        /// Обработчик события нажатия на кнопку доабления записей
         /// </summary>
         /// <param name="sender">Объект-отправитель</param>
         /// <param name="e">Параметры события</param>
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            switch(TableNames[TableSelector.Text])
+            {
+                case "source":
+                    new AddWindows.Source(DB.DataBaseWorker).ShowDialog();
+                    break;
+                default:
+                    MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+            }
+            SetUpTable(TableSelector.Text);
         }
     }
 
