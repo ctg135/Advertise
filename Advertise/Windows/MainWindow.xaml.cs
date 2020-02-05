@@ -49,6 +49,7 @@ namespace Advertise.Windows
                 if (!string.IsNullOrEmpty(TableName))
                 {
                     grid.ItemsSource = DB.SelectTable(TableNames[TableName]);
+                    SetUpTableNames(TableNames[TableName]);
                 }
             }
             catch (Exception ex)
@@ -76,7 +77,6 @@ namespace Advertise.Windows
         private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SetUpTable(e.AddedItems[0].ToString());
-            SetUpTableNames(TableNames[e.AddedItems[0].ToString()]);
             CurrentFields = new Dictionary<string, string>();
             CurrentFields = DB.ColumnNamesReversed(TableNames[e.AddedItems[0].ToString()]);
             ButtonAdd.IsEnabled = e.AddedItems.Count > 0;
@@ -139,6 +139,12 @@ namespace Advertise.Windows
             {
                 case "source":
                     new AddWindows.Source(DB.DataBaseWorker).ShowDialog();
+                    break;
+                case "investments":
+                    new AddWindows.Investment(DB.DataBaseWorker).ShowDialog();
+                    break;
+                case "clients":
+                    new AddWindows.Client(DB.DataBaseWorker).ShowDialog();
                     break;
                 default:
                     MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);

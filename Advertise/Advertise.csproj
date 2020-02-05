@@ -95,6 +95,12 @@
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Models\View.cs" />
+    <Compile Include="Windows\AddWindows\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddWindows\Investment.xaml.cs">
+      <DependentUpon>Investment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddWindows\Source.xaml.cs">
       <DependentUpon>Source.xaml</DependentUpon>
     </Compile>
@@ -130,6 +136,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Windows\AddWindows\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddWindows\Investment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddWindows\Source.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
