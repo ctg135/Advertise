@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
         mc:Ignorable="d" ResizeMode="NoResize"
-        Title='Добавление записи в таблицу "Источники"' Height="264" Width="580">
+        Title='Добавление записи в таблицу "Источники"' Height="198.269" Width="580">
     <Grid>
         <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="90,44,0,0" VerticalAlignment="Top" Width="158"/>
-        <Label Content="Название" HorizontalAlignment="Left" Margin="90,108,0,0" VerticalAlignment="Top" Width="103"/>
+        <Label Content="Название" HorizontalAlignment="Left" Margin="90,72,0,0" VerticalAlignment="Top" Width="103"/>
         <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="276,48,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="196"/>
-        <TextBox x:Name="TextBoxTitle" HorizontalAlignment="Left" Height="23" Margin="276,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196"/>
-        <Button Content="Добавить" Click="Button_Click" HorizontalAlignment="Left" Margin="212,167,0,0" VerticalAlignment="Top" Width="122"/>
+        <TextBox x:Name="TextBoxTitle" HorizontalAlignment="Left" Height="23" Margin="276,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196"/>
+        <Button Content="Добавить" Click="Button_Click" HorizontalAlignment="Left" Margin="206,117,0,0" VerticalAlignment="Top" Width="122"/>
 
     </Grid>
 </Window>

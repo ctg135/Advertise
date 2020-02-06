@@ -5,29 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows"
         mc:Ignorable="d" ResizeMode="NoResize"
-        Title="Программа анализа эффективности рекламы" Height="450" Width="800">
+        Title="Программа анализа эффективности рекламы" Height="598" Width="1012">
     <Grid>
         <DataGrid x:Name="grid"
-                  HorizontalAlignment="Left" Height="276" Margin="324,62,0,0" VerticalAlignment="Top" Width="417"
+                  HorizontalAlignment="Left" Height="418" Margin="10,129,0,0" VerticalAlignment="Top" Width="975"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CellEditEnding="grid_CellEditEnding"
                   SelectedCellsChanged="grid_SelectedCellsChanged"
+                  FontSize="15"
                   />
         <ComboBox x:Name="TableSelector"
-                  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120"
-                  SelectionChanged="TableSelector_SelectionChanged" Height="20"
+                  HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="120"
+                  SelectionChanged="TableSelector_SelectionChanged" Height="23"
                   />
-        <Button x:Name="ButtonDelete" Content="Удалить выбранные записи"
-                Click="ButtonDelete_Click"
-                HorizontalAlignment="Left" Margin="10,109,0,0" 
-                VerticalAlignment="Top" Width="176" Height="20"
-                IsEnabled="False"
-                />
-        <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click"
+
+        <GroupBox Header="Действия с записями" HorizontalAlignment="Left" Height="124" Margin="155,0,0,0" VerticalAlignment="Top" Width="315">
+            <Grid HorizontalAlignment="Right" Width="305" Margin="0,0,-2,0">
+                <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click"
                 Content="Добавить запись" HorizontalAlignment="Left" 
-                Margin="10,84,0,0" VerticalAlignment="Top" Width="176"
+                Margin="10,10,0,0" VerticalAlignment="Top" Width="285"
                 IsEnabled="False"
                 />
+                <Button x:Name="ButtonDelete" Content="Удалить выбранные записи"
+                Click="ButtonDelete_Click"
+                HorizontalAlignment="Left" Margin="10,35,0,0" 
+                VerticalAlignment="Top" Width="285" Height="20"
+                IsEnabled="False"
+                />
+            </Grid>
+        </GroupBox>
+        <Image x:Name="TableIcon" HorizontalAlignment="Left" Height="62" Margin="33,10,0,0" VerticalAlignment="Top" Width="74" Source="/Resources/TableIcon.png"/>
+        <Label Content="Выбор таблицы:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

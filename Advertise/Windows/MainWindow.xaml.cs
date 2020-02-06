@@ -135,6 +135,7 @@ namespace Advertise.Windows
         /// <param name="e">Параметры события</param>
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
+            // Выбор токна добавления по имени таблицы
             switch(TableNames[TableSelector.Text])
             {
                 case "source":
@@ -150,6 +151,7 @@ namespace Advertise.Windows
                     MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
+            // Обновление таблицы
             SetUpTable(TableSelector.Text);
         }
     }

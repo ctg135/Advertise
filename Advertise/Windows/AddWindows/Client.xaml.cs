@@ -25,6 +25,9 @@ namespace Advertise.Windows.AddWindows
         /// Словарь источников типа { "Название" - "Идентификатор" }
         /// </summary>
         private Dictionary<string, string> Sources;
+        /// <summary>
+        /// Возвращает имя таблицы в базе данных
+        /// </summary>
         private string TableName
         {
             get
@@ -32,24 +35,30 @@ namespace Advertise.Windows.AddWindows
                 return "clients";
             }
         }
+        /// <summary>
+        /// Конструктор окна для добавления записи в таблицу "Клиенты"
+        /// </summary>
+        /// <param name="DataBaseWorker">Экземпляр для работы с базой данных</param>
         public Client(DataBaseWorker DataBaseWorker)
         {
             InitializeComponent();
             DB = DataBaseWorker;
             Sources = new Dictionary<string, string>();
-            // 
+            // Установка значений селектора
             DataTable Table = DB.SelectTable("source");
             foreach (DataRow row in Table.Rows)
             {
                 ComboBoxSource.Items.Add(row["Title"].ToString());
                 Sources.Add(row["Title"].ToString(), row["Id"].ToString());
             }
-            //
+            // Установка текущих дат и времени
             DatePickerDate.SelectedDate = DateTime.Now;
             TextBoxTime.Text = DateTime.Now.ToString("t");
             
         }
-
+        /// <summary>
+        /// Обработчик нажатия на кнопку добавления записи
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try

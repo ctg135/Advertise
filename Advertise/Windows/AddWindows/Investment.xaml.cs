@@ -20,11 +20,17 @@ namespace Advertise.Windows.AddWindows
     /// </summary>
     public partial class Investment : Window
     {
+        /// <summary>
+        /// Экземпляр для работы с базой данных
+        /// </summary>
         private DataBaseWorker DB;
         /// <summary>
         /// Словарь источников типа { "Название" - "Идентификатор" }
         /// </summary>
         private Dictionary<string, string> Sources;
+        /// <summary>
+        /// Возвращает имя таблицы в базе данных
+        /// </summary>
         private string TableName
         {
             get
@@ -32,22 +38,29 @@ namespace Advertise.Windows.AddWindows
                 return "investments";
             }
         }
+        /// <summary>
+        /// Конструктор окна для добавления записей в таблицу "Вложения"
+        /// </summary>
+        /// <param name="DataBaseWorker">Экземпляр для работы с базой данных</param>
         public Investment(DataBaseWorker DataBaseWorker)
         {
             InitializeComponent();
             this.DB = DataBaseWorker;
             Sources = new Dictionary<string, string>();
-            // 
+            // Установка значений селектора
             DataTable Table = DB.SelectTable("source");
             foreach (DataRow row in Table.Rows)
             {
                 ComboBoxSource.Items.Add(row["Title"].ToString());
                 Sources.Add(row["Title"].ToString(), row["Id"].ToString());
             }
+            // Установка текущей даты
             TextBoxMonth.Text = DateTime.Now.ToString("MM");
             TextBoxYear.Text = DateTime.Now.ToString("yyyy");
         }
-
+        /// <summary>
+        /// Обработчик нажатия на кнопку добавления записи
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
