@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
         mc:Ignorable="d"
+        Icon="/Resources/AddRowIcon.png"
         Title='Добавление записи в таблицу "Клинеты"' Height="331.5" Width="453.5">
     <Grid>
         <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="86,46,0,0" VerticalAlignment="Top"/>
@@ -14,7 +15,7 @@
         <Label Content="Время" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top"/>
         <Label Content="Прибыль" HorizontalAlignment="Left" Margin="86,186,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="248,50,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Height="23" Margin="248,78,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Height="23" Margin="248,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboBoxSource" HorizontalAlignment="Left" Height="23" Margin="248,106,0,0"  VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextBoxTime" HorizontalAlignment="Left" Height="23" Margin="248,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Foreground="Black"/>
         <DatePicker x:Name="DatePickerDate" HorizontalAlignment="Left" Margin="248,134,0,0" VerticalAlignment="Top" Width="120"/>

@@ -1,0 +1,21 @@
+﻿<Window x:Class="Advertise.Windows.AddWindows.View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
+        mc:Ignorable="d"
+        Title='Добавление записи в таблицу "Просмотры"' Height="276" Width="405.5" Icon="/Resources/AddRowIcon.png">
+    <Grid>
+        <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="64,46,0,0" VerticalAlignment="Top"/>
+        <Label Content="Источник" HorizontalAlignment="Left" Margin="64,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Дата" HorizontalAlignment="Left" Margin="64,106,0,0" VerticalAlignment="Top"/>
+        <Label Content="Время" HorizontalAlignment="Left" Margin="64,136,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="24" Margin="212,48,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxSource" HorizontalAlignment="Left" Margin="212,76,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="DatePickerDate" HorizontalAlignment="Left" Margin="212,108,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxTime" HorizontalAlignment="Left" Height="24" Margin="212,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Добавть" Click="Button_Click" HorizontalAlignment="Left" Margin="153,184,0,0" VerticalAlignment="Top" Width="76"/>
+
+    </Grid>
+</Window>

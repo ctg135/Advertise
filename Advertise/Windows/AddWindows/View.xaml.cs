@@ -16,9 +16,9 @@ using System.Data;
 namespace Advertise.Windows.AddWindows
 {
     /// <summary>
-    /// Логика взаимодействия для Client.xaml
+    /// Логика взаимодействия для View.xaml
     /// </summary>
-    public partial class Client : Window
+    public partial class View : Window
     {
         /// <summary>
         /// Экземпляр для работы с базой данных
@@ -35,14 +35,14 @@ namespace Advertise.Windows.AddWindows
         {
             get
             {
-                return "clients";
+                return "viewsadd";
             }
         }
         /// <summary>
         /// Конструктор окна для добавления записи в таблицу "Клиенты"
         /// </summary>
         /// <param name="DataBaseWorker">Экземпляр для работы с базой данных</param>
-        public Client(DataBaseWorker DataBaseWorker)
+        public View(DataBaseWorker DataBaseWorker)
         {
             InitializeComponent();
             DB = DataBaseWorker;
@@ -57,7 +57,6 @@ namespace Advertise.Windows.AddWindows
             // Установка текущих дат и времени
             DatePickerDate.SelectedDate = DateTime.Now;
             TextBoxTime.Text = DateTime.Now.ToString("T");
-            
         }
         /// <summary>
         /// Обработчик нажатия на кнопку добавления записи
@@ -68,11 +67,9 @@ namespace Advertise.Windows.AddWindows
             {
                 DB.Insert(TableName, new Dictionary<string, string> {
                     { "Id", TextBoxId.Text.ToLower() == "по умолчанию" ? "" : TextBoxId.Text  },
-                    { "Name", TextBoxName.Text },
                     { "Source", Sources[ComboBoxSource.Text] },
                     { "Date", DatePickerDate.Text },
-                    { "Time", TextBoxTime.Text },
-                    { "Profit", TextBoxProfit.Text }
+                    { "Time", TextBoxTime.Text }
                 });
             }
             catch (Exception ex)

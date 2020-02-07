@@ -35,7 +35,7 @@
                 />
             </Grid>
         </GroupBox>
-        <Image x:Name="TableIcon" HorizontalAlignment="Left" Height="62" Margin="33,10,0,0" VerticalAlignment="Top" Width="74" Source="/Resources/TableIcon.png"/>
+        <Image x:Name="TableIcon" HorizontalAlignment="Left" Height="62" Margin="39,10,0,0" VerticalAlignment="Top" Width="62" Source="/Resources/TableIcon.png"/>
         <Label Content="Выбор таблицы:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
         mc:Ignorable="d"
+        Icon="/Resources/AddRowIcon.png"
         Title='Добавление записи в таблицу "Вложения"' Height="296.076" Width="384.859">
     <Grid>
         <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="51,36,0,0" VerticalAlignment="Top"/>
