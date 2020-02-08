@@ -17,6 +17,9 @@ namespace Advertise
         /// Экземпляр для подключения к базе данных
         /// </summary>
         private DataBaseWorker DB;
+        /// <summary>
+        /// Экземпляр для работы с базой данных
+        /// </summary>
         public DataBaseWorker DataBaseWorker { get => DB; }
         /// <summary>
         /// Конструктор для подключения к базе данных
