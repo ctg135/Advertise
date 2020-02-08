@@ -12,7 +12,7 @@ namespace Advertise.Models
     public class Investment : IModel
     {
         public int Id { get; set; }
-        public int Source { get; set; }
+        public string Source { get; set; }
         public int Amount { get; set; }
         public string Month { get; set; }
     }

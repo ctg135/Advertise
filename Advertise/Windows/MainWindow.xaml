@@ -11,7 +11,7 @@
                   HorizontalAlignment="Left" Height="418" Margin="10,129,0,0" VerticalAlignment="Top" Width="975"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  CellEditEnding="grid_CellEditEnding"
+                  IsReadOnly="True"                  
                   SelectedCellsChanged="grid_SelectedCellsChanged"
                   FontSize="15"
                   />

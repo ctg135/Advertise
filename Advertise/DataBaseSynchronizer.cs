@@ -80,13 +80,19 @@ namespace Advertise
                     }
                     return sources;
                 case "investments":
+                    Dictionary<int, string> source = new Dictionary<int, string>();
+                    List<Source> sourceDB = (List<Source>)SelectTable("source");
+                    foreach(Source sou in sourceDB)
+                    {
+                        source.Add(sou.Id, sou.Title);
+                    }
                     List<Investment> invesments = new List<Investment>();
                     foreach(DataRow row in DB.SelectTable(TableName).Rows)
                     {
                         invesments.Add(new Investment() 
                         { 
                             Id = int.Parse(row["Id"].ToString()),
-                            Source = int.Parse(row["Source"].ToString()),
+                            Source = source[int.Parse(row["Source"].ToString())],
                             Amount = int.Parse(row["Amount"].ToString()),
                             Month = row["Month"].ToString()
                         }
@@ -94,6 +100,12 @@ namespace Advertise
                     }
                     return invesments;
                 case "clients":
+                    Dictionary<int, string> source1 = new Dictionary<int, string>();
+                    List<Source> sourceDB1 = (List<Source>)SelectTable("source");
+                    foreach (Source sou in sourceDB1)
+                    {
+                        source1.Add(sou.Id, sou.Title);
+                    }
                     List<Client> clients = new List<Client>();
                     foreach(DataRow row in DB.SelectTable(TableName).Rows)
                     {
@@ -102,7 +114,7 @@ namespace Advertise
                         {
                             Id = int.Parse(row["Id"].ToString()),
                             Name = row["Name"].ToString(),
-                            Source = int.Parse(row["Source"].ToString()),
+                            Source = source1[int.Parse(row["Source"].ToString())],
                             Date = date.ToString("d"),
                             Time = row["Time"].ToString(),
                             Profit = int.Parse(row["Profit"].ToString()),
@@ -132,7 +144,6 @@ namespace Advertise
                     result.Add("Source", "Источник");
                     result.Add("Amount", "Размер вложения");
                     result.Add("Month", "Месяц вложения");
-                    result.Add("Year", "Год вложения");
                     break;
                 case "clients":
                     result.Add("Id", "Идентификатор");
@@ -141,12 +152,6 @@ namespace Advertise
                     result.Add("Date", "Дата покупки");
                     result.Add("Time", "Время покупки");
                     result.Add("Profit", "Прибыль");
-                    break;
-                case "viewsadd":
-                    result.Add("Id", "Идентификатор");
-                    result.Add("Source", "Источник");
-                    result.Add("Date", "Дата просмотра");
-                    result.Add("Time", "Время просмотра");
                     break;
             }
             return result;
@@ -172,10 +177,7 @@ namespace Advertise
         /// <param name="Id">Идентификатор записи</param>
         /// <param name="Column">Столбец с измененным значением</param>
         /// <param name="NewValue">Новое значение ячейки</param>
-        public void UpdateTable(string TableName,  string Id, string Column, string NewValue)
-        {
-            DB.UpdateTable(TableName, Id, new Dictionary<string, string>() { { Column, NewValue } });
-        }
+        public void UpdateTable(string TableName,  string Id, string Column, string NewValue) => DB.UpdateTable(TableName, Id, new Dictionary<string, string>() { { Column, NewValue } });
         /// <summary>
         /// Удаляет поля из базы данных
         /// </summary>

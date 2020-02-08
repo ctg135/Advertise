@@ -13,7 +13,7 @@ namespace Advertise.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Source { get; set; }
+        public string Source { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
         public int Profit { get; set; }
