@@ -81,29 +81,6 @@ namespace Advertise.Windows
             CurrentFields = DB.ColumnNamesReversed(TableNames[e.AddedItems[0].ToString()]);
             ButtonAdd.IsEnabled = e.AddedItems.Count > 0;
         }
-                
-        /// <summary>
-        /// Функция-обработчик измененения значения ячейки
-        /// </summary>
-        /// <param name="sender">Отправитель сообщения</param>
-        /// <param name="e">Аргументы события</param>
-        private void grid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            try
-            {
-                DB.UpdateTable(
-                    TableNames[TableSelector.Text], 
-                    ((Models.IModel)grid.Items[e.Row.GetIndex()]).Id.ToString(), 
-                    CurrentFields[e.Column.Header.ToString()], 
-                    (e.EditingElement as TextBox).Text
-                );
-            }
-            catch(Exception ex)
-            {
-                e.Cancel = true;
-                MessageBox.Show(ex.Message);
-            }
-        }
         /// <summary>
         /// Функция-обработчик события выбранной таблицы
         /// </summary>
@@ -111,7 +88,8 @@ namespace Advertise.Windows
         /// <param name="e">Параметры события</param>
         private void grid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            ButtonDelete.IsEnabled = grid.SelectedCells.Count > 0;
+            ButtonDelete.IsEnabled = grid.SelectedItems.Count > 0;
+            ButtonEdit.IsEnabled = grid.SelectedItems.Count == 1;
         }
         /// <summary>
         /// Функция-обработчик нажатия на кнопку удаления выбранных записей
@@ -149,6 +127,21 @@ namespace Advertise.Windows
                     break;
                 default:
                     MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+            }
+            // Обновление таблицы
+            SetUpTable(TableSelector.Text);
+        }
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            switch (TableNames[TableSelector.Text])
+            {
+                case "source":
+                    Models.Source source = (Models.Source)grid.SelectedItem;
+                    new EditWindows.Source(DB.DataBaseWorker, source.Id).ShowDialog();
+                    break;
+                default:
+                    MessageBox.Show("Форма редактирования записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
             // Обновление таблицы

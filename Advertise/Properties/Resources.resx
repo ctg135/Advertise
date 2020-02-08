@@ -121,6 +121,9 @@
   <data name="AddRowIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddRowIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EditRowIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditRowIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TableIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TableIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

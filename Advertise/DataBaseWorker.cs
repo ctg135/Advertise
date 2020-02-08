@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-
-using System.Diagnostics;
 
 namespace Advertise
 {
@@ -136,8 +131,9 @@ namespace Advertise
             string query = $"UPDATE `{TableName}` SET";
             foreach(var pair in newValues)
             {
-                query += $"\n`{pair.Key}` = '{pair.Value}'";
+                query += $"\n`{pair.Key}` = '{pair.Value}',";
             }
+            query = query.Remove(query.Length - 1, 1);
             query += $"\nWHERE `Id` = {Id}";
             ExecuteQuery(query);
         }

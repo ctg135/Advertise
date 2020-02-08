@@ -73,6 +73,16 @@ namespace Advertise.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditRowIcon {
+            get {
+                object obj = ResourceManager.GetObject("EditRowIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TableIcon {
             get {
                 object obj = ResourceManager.GetObject("TableIcon", resourceCulture);
