@@ -6,18 +6,30 @@
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
         mc:Ignorable="d"
         Icon="/Resources/AddRowIcon.png"
-        Title='Добавление записи в таблицу "Вложения"' Height="296.076" Width="384.859">
+        ResizeMode="NoResize"
+        Title='Добавление записи в таблицу "Вложения"' Height="255.702" Width="517.196">
     <Grid>
-        <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="51,36,0,0" VerticalAlignment="Top"/>
-        <Label Content="Источник" HorizontalAlignment="Left" Margin="51,67,0,0" VerticalAlignment="Top"/>
-        <Label Content="Количестов вложений" HorizontalAlignment="Left" Margin="51,98,0,0" VerticalAlignment="Top"/>
-        <Label Content="Месяц" HorizontalAlignment="Left" Margin="51,129,0,0" VerticalAlignment="Top"/>
-        <Label Content="Год" HorizontalAlignment="Left" Margin="51,160,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="200,39,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboBoxSource" HorizontalAlignment="Left" Height="23" Margin="200,70,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxAmount" HorizontalAlignment="Left" Height="23" Margin="200,101,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxMonth" HorizontalAlignment="Left" Height="23" Margin="200,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxYear" HorizontalAlignment="Left" Height="23" Margin="200,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Добавить" Click="Button_Click" HorizontalAlignment="Left" Margin="155,214,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Идентификатор" HorizontalAlignment="Left" Margin="117,35,0,0" VerticalAlignment="Top"/>
+        <Label Content="Источник" HorizontalAlignment="Left" Margin="117,66,0,0" VerticalAlignment="Top"/>
+        <Label Content="Количестов вложений" HorizontalAlignment="Left" Margin="117,97,0,0" VerticalAlignment="Top"/>
+        <Label Content="Месяц" HorizontalAlignment="Left" Margin="117,128,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="266,38,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxSource" HorizontalAlignment="Left" Height="23" Margin="266,69,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxAmount" HorizontalAlignment="Left" Height="23" Margin="266,100,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxMonth" HorizontalAlignment="Left" Height="23" Margin="266,131,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Январь</ComboBoxItem>
+            <ComboBoxItem>Февраль</ComboBoxItem>
+            <ComboBoxItem>Март</ComboBoxItem>
+            <ComboBoxItem>Апрель</ComboBoxItem>
+            <ComboBoxItem>Май</ComboBoxItem>
+            <ComboBoxItem>Июнь</ComboBoxItem>
+            <ComboBoxItem>Июль</ComboBoxItem>
+            <ComboBoxItem>Август</ComboBoxItem>
+            <ComboBoxItem>Сентябрь</ComboBoxItem>
+            <ComboBoxItem>Октябрь</ComboBoxItem>
+            <ComboBoxItem>Ноябрь</ComboBoxItem>
+            <ComboBoxItem>Декабрь</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Добавить" Click="Button_Click" HorizontalAlignment="Left" Margin="221,169,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

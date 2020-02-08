@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Icon="/Resources/AddRowIcon.png"
         Title='Добавление записи в таблицу "Клинеты"' Height="331.5" Width="453.5">
     <Grid>

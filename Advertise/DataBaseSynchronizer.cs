@@ -41,7 +41,6 @@ namespace Advertise
             tableNames["clients"] = "Клиенты";
             tableNames["source"] = "Источники";
             tableNames["investments"] = "Вложения";
-            tableNames["viewsadd"] = "Просмотры";
             return tableNames;
         }
         /// <summary>
@@ -89,8 +88,7 @@ namespace Advertise
                             Id = int.Parse(row["Id"].ToString()),
                             Source = int.Parse(row["Source"].ToString()),
                             Amount = int.Parse(row["Amount"].ToString()),
-                            Month = int.Parse(row["Month"].ToString()),
-                            Year = int.Parse(row["Year"].ToString())
+                            Month = row["Month"].ToString()
                         }
                         );
                     }
@@ -112,22 +110,6 @@ namespace Advertise
                         );
                     }
                     return clients;
-                case "viewsadd":
-                    List<View> views = new List<View>();
-                    foreach (DataRow row in DB.SelectTable(TableName).Rows)
-                    {
-                        DateTime date = (DateTime)row["Date"];
-                        views.Add(new View
-                        {
-                            Id = int.Parse(row["Id"].ToString()),
-                            Source = int.Parse(row["Source"].ToString()),
-                            Date = date.ToString("d"),
-                            Time = row["Time"].ToString(),
-                        }
-                        );
-                    }
-                    return views;
-
             }
             return null;
         }

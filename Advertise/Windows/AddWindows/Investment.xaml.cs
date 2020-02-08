@@ -55,8 +55,7 @@ namespace Advertise.Windows.AddWindows
                 Sources.Add(row["Title"].ToString(), row["Id"].ToString());
             }
             // Установка текущей даты
-            TextBoxMonth.Text = DateTime.Now.ToString("MM");
-            TextBoxYear.Text = DateTime.Now.ToString("yyyy");
+            ComboBoxMonth.SelectedIndex = int.Parse(DateTime.Now.ToString("MM")) - 1;
         }
         /// <summary>
         /// Обработчик нажатия на кнопку добавления записи
@@ -69,8 +68,7 @@ namespace Advertise.Windows.AddWindows
                     { "Id", TextBoxId.Text.ToLower() == "по умолчанию" ? "" : TextBoxId.Text  },
                     { "Source", Sources[ComboBoxSource.Text] },
                     { "Amount", TextBoxAmount.Text },
-                    { "Month", TextBoxMonth.Text },
-                    { "Year", TextBoxYear.Text }
+                    { "Month", ComboBoxMonth.Text }
                 });
             }
             catch (Exception ex)

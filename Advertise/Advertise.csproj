@@ -94,7 +94,6 @@
     <Compile Include="Models\Investment.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Source.cs" />
-    <Compile Include="Models\View.cs" />
     <Compile Include="Windows\AddWindows\Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
@@ -103,9 +102,6 @@
     </Compile>
     <Compile Include="Windows\AddWindows\Source.xaml.cs">
       <DependentUpon>Source.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\AddWindows\View.xaml.cs">
-      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -148,10 +144,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AddWindows\Source.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\AddWindows\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

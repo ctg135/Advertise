@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows.AddWindows"
-        mc:Ignorable="d" ResizeMode="NoResize"
+        mc:Ignorable="d" 
+        ResizeMode="NoResize"
         Icon="/Resources/AddRowIcon.png"
         Title='Добавление записи в таблицу "Источники"' Height="198.269" Width="580">
     <Grid>

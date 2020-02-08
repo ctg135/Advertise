@@ -147,9 +147,6 @@ namespace Advertise.Windows
                 case "clients":
                     new AddWindows.Client(DB.DataBaseWorker).ShowDialog();
                     break;
-                case "viewsadd":
-                    new AddWindows.View(DB.DataBaseWorker).ShowDialog();
-                    break;
                 default:
                     MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;

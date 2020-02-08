@@ -25,7 +25,7 @@ namespace Advertise
             }
             else
             {
-                OnExit(null);
+                Current.Shutdown();
             }
 
         }
@@ -46,7 +46,7 @@ namespace Advertise
                 }
                 catch (Exception ex)
                 {
-                    switch (MessageBox.Show(ex.Message + "\nНажмите \"Да\" для потворного полдключения", "Ошибка подключения", MessageBoxButton.YesNo, MessageBoxImage.Error))
+                    switch (MessageBox.Show(ex.Message + "\nНажмите \"Да\" для потворного подключения", "Ошибка подключения", MessageBoxButton.YesNo, MessageBoxImage.Error))
                     {
                         case MessageBoxResult.Yes:
                             retry = true;
