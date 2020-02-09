@@ -103,6 +103,12 @@
     <Compile Include="Windows\AddWindows\Source.xaml.cs">
       <DependentUpon>Source.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EditWindows\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditWindows\Investment.xaml.cs">
+      <DependentUpon>Investment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditWindows\Source.xaml.cs">
       <DependentUpon>Source.xaml</DependentUpon>
     </Compile>
@@ -147,6 +153,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AddWindows\Source.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditWindows\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditWindows\Investment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -140,6 +140,14 @@ namespace Advertise.Windows
                     Models.Source source = (Models.Source)grid.SelectedItem;
                     new EditWindows.Source(DB.DataBaseWorker, source.Id).ShowDialog();
                     break;
+                case "clients":
+                    Models.Client clients = (Models.Client)grid.SelectedItem;
+                    new EditWindows.Client(DB.DataBaseWorker, clients.Id).ShowDialog();
+                    break;
+                case "investment":
+                    Models.Investment investment = (Models.Investment)grid.SelectedItem;
+                    new EditWindows.Investment(DB.DataBaseWorker, investment.Id).ShowDialog();
+                    break;
                 default:
                     MessageBox.Show("Форма редактирования записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;

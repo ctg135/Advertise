@@ -16,9 +16,9 @@ using System.Data;
 namespace Advertise.Windows.EditWindows
 {
     /// <summary>
-    /// Логика взаимодействия для Source.xaml
+    /// Логика взаимодействия для Investment.xaml
     /// </summary>
-    public partial class Source : Window
+    public partial class Investment : Window
     {
         /// <summary>
         /// Экземпляр для работы с базой данных
@@ -35,39 +35,43 @@ namespace Advertise.Windows.EditWindows
         {
             get
             {
-                return "source";
+                return "investment";
             }
         }
+        Dictionary<string, string> Sources;
         /// <summary>
-        /// Конструктор окна для изменения записи в таблице "Источники"
+        /// Конструктор окна для изменения записи в таблице "Клиенты"
         /// </summary>
         /// <param name="DataBaseWorker">Экземпляр для работы с базой данных</param>
-        /// <param name="Id">Идентификатор записи в таблице "Источники"</param>
-        public Source(DataBaseWorker DataBaseWorker, int Id)
+        /// <param name="Id">Идентификатор записи в таблице "Клиенты"</param>
+        public Investment(DataBaseWorker DataBaseWorker, int Id)
         {
             InitializeComponent();
             DB = DataBaseWorker;
             this.Id = Id;
-            // Установка полей
+            Sources = new Dictionary<string, string>();
             DataTable item = DB.MakeQuery($"SELECT * FROM `{TableName}` WHERE `Id` = '{Id}'");
+            foreach (DataRow row in DB.SelectTable("source").Rows)
+            {
+                Sources.Add(row["Title"].ToString(), row["Id"].ToString());
+                ComboBoxItem item1 = item.Rows[0]["Source"].ToString() == row["Id"].ToString() ? new ComboBoxItem() { IsSelected = true, Content = row["Title"].ToString() } : new ComboBoxItem() { Content = row["Title"].ToString() };
+                ComboBoxSource.Items.Add(item1);
+            }
             TextBoxId.Text = item.Rows[0]["Id"].ToString();
-            TextBoxTitle.Text = item.Rows[0]["Title"].ToString();
+
         }
-        /// <summary>
-        /// Обработчик нажатия на кнопку изменения записи
-        /// </summary>
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 DB.UpdateTable(TableName, Id.ToString(), new Dictionary<string, string>()
                 {
-                    { "Id", TextBoxId.Text },
-                    {"Title", TextBoxTitle.Text }
+                    { "Id", TextBoxId.Text }
                 }
                 );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка редактирования записи", MessageBoxButton.OK, MessageBoxImage.Error);
             }
