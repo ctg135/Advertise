@@ -144,7 +144,7 @@ namespace Advertise.Windows
                     Models.Client clients = (Models.Client)grid.SelectedItem;
                     new EditWindows.Client(DB.DataBaseWorker, clients.Id).ShowDialog();
                     break;
-                case "investment":
+                case "investments":
                     Models.Investment investment = (Models.Investment)grid.SelectedItem;
                     new EditWindows.Investment(DB.DataBaseWorker, investment.Id).ShowDialog();
                     break;

@@ -35,9 +35,12 @@ namespace Advertise.Windows.EditWindows
         {
             get
             {
-                return "investment";
+                return "investments";
             }
         }
+        /// <summary>
+        /// Словарь источников типа {"Название", "Номер"}
+        /// </summary>
         Dictionary<string, string> Sources;
         /// <summary>
         /// Конструктор окна для изменения записи в таблице "Клиенты"
@@ -58,7 +61,10 @@ namespace Advertise.Windows.EditWindows
                 ComboBoxSource.Items.Add(item1);
             }
             TextBoxId.Text = item.Rows[0]["Id"].ToString();
-
+            foreach(ComboBoxItem comboBoxItem in ComboBoxMonth.Items)
+                if(comboBoxItem.Content.ToString() == item.Rows[0]["Month"].ToString())                
+                    comboBoxItem.IsSelected = true;
+            TextBoxAmount.Text = item.Rows[0]["Amount"].ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,7 +73,10 @@ namespace Advertise.Windows.EditWindows
             {
                 DB.UpdateTable(TableName, Id.ToString(), new Dictionary<string, string>()
                 {
-                    { "Id", TextBoxId.Text }
+                    { "Id", TextBoxId.Text },
+                    { "Source", Sources[ComboBoxSource.Text] },
+                    { "Amount", TextBoxAmount.Text },
+                    { "Month", ComboBoxMonth.Text }
                 }
                 );
             }

@@ -13,9 +13,9 @@
         <Label Content="Источник" HorizontalAlignment="Left" Margin="117,66,0,0" VerticalAlignment="Top"/>
         <Label Content="Количестов вложений" HorizontalAlignment="Left" Margin="117,97,0,0" VerticalAlignment="Top"/>
         <Label Content="Месяц" HorizontalAlignment="Left" Margin="117,128,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="266,38,0,0" TextWrapping="Wrap" Text="По умолчанию" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxId" HorizontalAlignment="Left" Height="23" Margin="266,38,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboBoxSource" HorizontalAlignment="Left" Height="23" Margin="266,69,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxAmount" HorizontalAlignment="Left" Height="23" Margin="266,100,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxAmount" HorizontalAlignment="Left" Height="23" Margin="266,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboBoxMonth" HorizontalAlignment="Left" Height="23" Margin="266,131,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem>Январь</ComboBoxItem>
             <ComboBoxItem>Февраль</ComboBoxItem>
@@ -28,7 +28,7 @@
             <ComboBoxItem>Сентябрь</ComboBoxItem>
             <ComboBoxItem>Октябрь</ComboBoxItem>
             <ComboBoxItem>Ноябрь</ComboBoxItem>
-            <ComboBoxItem>Декабрь</ComboBoxItem>
+            <ComboBoxItem>Декабрь</ComboBoxItem> 
         </ComboBox>
         <Button Content="Изменить" Click="Button_Click" HorizontalAlignment="Left" Margin="221,169,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
