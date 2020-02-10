@@ -22,21 +22,42 @@ namespace Advertise.Windows
         /// <summary>
         /// Экземпляр для работы с базой данных "Advertise"
         /// </summary>
-        private DataBaseSynchronizer DB;
+        public DataBaseSynchronizer DB;
         /// <summary>
         /// Список имен таблиц базы данных на русском
         /// </summary>
-        private Dictionary<string, string> TableNames;
+        public Dictionary<string, string> TableNames;
         /// <summary>
-        /// Список столбцов таблиц на русском
+        /// Экземпляр для контроля состояния порграммы
         /// </summary>
-        private Dictionary<string, string> CurrentFields;
+        private StateControllerMainWindow stater;
+        /// <summary>
+        /// Событие выбранной таблицы
+        /// </summary>
+        public event EventHandler TableSelected;
+        /// <summary>
+        /// Событие обновления таблицы
+        /// </summary>
+        public event EventHandler TableRefreshing;
+        /// <summary>
+        /// Событие выбранной строки
+        /// </summary>
+        public event EventHandler RowSelected;
+        /// <summary>
+        /// Событие выбранных строк
+        /// </summary>
+        public event EventHandler RowsSelected;
+        /// <summary>
+        /// Событие не выбранных строк
+        /// </summary>
+        public event EventHandler RowNotSelected;
         public MainWindow(DataBaseSynchronizer dataBaseSynchronizer)
         {
             InitializeComponent();
             DB = dataBaseSynchronizer;
             TableNames = DB.GetTableNamesReversed();
             TableSelector.ItemsSource = DB.GetTableNames().Values;
+            stater = new StateControllerMainWindow(this);
         }
         /// <summary>
         /// Функция для устаовки таблицы данных
@@ -49,7 +70,7 @@ namespace Advertise.Windows
                 if (!string.IsNullOrEmpty(TableName))
                 {
                     grid.ItemsSource = DB.SelectTable(TableNames[TableName]);
-                    SetUpTableNames(TableNames[TableName]);
+                    SetUpTableNames(TableName);
                 }
             }
             catch (Exception ex)
@@ -60,26 +81,23 @@ namespace Advertise.Windows
         /// <summary>
         /// Функция для установки русских столбцов
         /// </summary>
-        /// <param name="TableName">Имя таблицы в базе данных</param>
+        /// <param name="TableName">Имя таблицы на русском</param>
         public void SetUpTableNames(string TableName)
         {
-            var names = DB.ColumnNames(TableName);
+            var names = DB.ColumnNames(TableNames[TableName]);
             foreach (var col in grid.Columns)
             {
                 col.Header = names[col.Header.ToString()];
             }
         }
         /// <summary>
-        /// Обработчик события выбора таблицы
+        /// Обработчик события выбора таблицы из селектора
         /// </summary>
         /// <param name="sender">Объект-отправитель</param>
         /// <param name="e">Аргументы события</param>
         private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SetUpTable(e.AddedItems[0].ToString());
-            CurrentFields = new Dictionary<string, string>();
-            CurrentFields = DB.ColumnNamesReversed(TableNames[e.AddedItems[0].ToString()]);
-            ButtonAdd.IsEnabled = e.AddedItems.Count > 0;
+            TableSelected(this, e);
         }
         /// <summary>
         /// Функция-обработчик события выбранной таблицы
@@ -88,8 +106,18 @@ namespace Advertise.Windows
         /// <param name="e">Параметры события</param>
         private void grid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            ButtonDelete.IsEnabled = grid.SelectedItems.Count > 0;
-            ButtonEdit.IsEnabled = grid.SelectedItems.Count == 1;
+            if (grid.SelectedItems.Count == 1)
+            {
+                RowSelected(this, e);
+            }
+            else if(grid.SelectedItems.Count > 1)
+            {
+                RowsSelected(this, e);
+            }
+            else if(grid.SelectedItems.Count == 0)
+            {
+                RowNotSelected(this, e);
+            }
         }
         /// <summary>
         /// Функция-обработчик нажатия на кнопку удаления выбранных записей
@@ -104,7 +132,7 @@ namespace Advertise.Windows
                 DeletingID.Add(((Models.IModel)row).Id.ToString());
             }
             DB.DeleteSome(TableNames[TableSelector.Text], DeletingID);
-            SetUpTable(TableSelector.Text);
+            TableRefreshing(this, e);
         }
         /// <summary>
         /// Обработчик события нажатия на кнопку доабления записей
@@ -129,8 +157,7 @@ namespace Advertise.Windows
                     MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
-            // Обновление таблицы
-            SetUpTable(TableSelector.Text);
+            TableRefreshing(this, e);
         }
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
@@ -152,8 +179,7 @@ namespace Advertise.Windows
                     MessageBox.Show("Форма редактирования записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
-            // Обновление таблицы
-            SetUpTable(TableSelector.Text);
+            TableRefreshing(this, e);
         }
     }
 
