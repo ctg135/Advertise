@@ -70,7 +70,7 @@ namespace Advertise.Windows.AddWindows
                     { "Id", TextBoxId.Text.ToLower() == "по умолчанию" ? "" : TextBoxId.Text  },
                     { "Name", TextBoxName.Text },
                     { "Source", Sources[ComboBoxSource.Text] },
-                    { "Date", DatePickerDate.Text },
+                    { "Date", ((DateTime)DatePickerDate.SelectedDate).ToString("yyyy-MM-dd") },
                     { "Time", TextBoxTime.Text },
                     { "Profit", TextBoxProfit.Text }
                 });

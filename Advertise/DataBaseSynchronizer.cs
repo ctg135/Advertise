@@ -112,13 +112,12 @@ namespace Advertise
                     List<Client> clients = new List<Client>();
                     foreach(DataRow row in DB.SelectTable(TableName).Rows)
                     {
-                        DateTime date = (DateTime)row["Date"];
                         clients.Add(new Client
                         {
                             Id = int.Parse(row["Id"].ToString()),
                             Name = row["Name"].ToString(),
                             Source = source1[int.Parse(row["Source"].ToString())],
-                            Date = date.ToString("d"),
+                            Date = DateTime.Parse(row["Date"].ToString()).ToString("d"),
                             Time = row["Time"].ToString(),
                             Profit = int.Parse(row["Profit"].ToString()),
                         }

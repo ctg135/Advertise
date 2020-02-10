@@ -38,6 +38,9 @@ namespace Advertise.Windows.EditWindows
                 return "clients";
             }
         }
+        /// <summary>
+        /// Список источников типа "Название" - "Идентификатор"
+        /// </summary>
         Dictionary<string, string> Sources;
         /// <summary>
         /// Конструктор окна для изменения записи в таблице "Клиенты"
@@ -60,7 +63,7 @@ namespace Advertise.Windows.EditWindows
             // Установка полей
             TextBoxId.Text = item.Rows[0]["Id"].ToString();
             TextBoxName.Text = item.Rows[0]["Name"].ToString();
-            DatePickerDate.DisplayDate = DateTime.Parse(item.Rows[0]["Date"].ToString());
+            DatePickerDate.SelectedDate = DateTime.Parse(item.Rows[0]["Date"].ToString());
             TextBoxTime.Text = item.Rows[0]["Time"].ToString();
             TextBoxProfit.Text = item.Rows[0]["Profit"].ToString();
         }
@@ -74,11 +77,11 @@ namespace Advertise.Windows.EditWindows
                 DB.UpdateTable(TableName, Id.ToString(), new Dictionary<string, string>()
                 {
                     { "Id", TextBoxId.Text },
-                    {"Name", TextBoxName.Text },
-                    {"Source", Sources[ComboBoxSource.Text] },
-                    {"Date", DatePickerDate.SelectedDate.ToString() },
-                    {"Time", TextBoxTime.Text },
-                    {"Profit", TextBoxProfit.Text }
+                    { "Name", TextBoxName.Text },
+                    { "Source", Sources[ComboBoxSource.Text] },
+                    { "Date", ((DateTime)DatePickerDate.SelectedDate).ToString("yyyy-MM-dd") },
+                    { "Time", TextBoxTime.Text },
+                    { "Profit", TextBoxProfit.Text }
                 }
                 );
             }

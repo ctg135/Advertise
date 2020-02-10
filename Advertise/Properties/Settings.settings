@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="connectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Server=localhost;Database=advertise;User Id=root;Pwd=;</Value>
+      <Value Profile="(Default)">Server=localhost;Database=advertise;User Id=root;Pwd=;convert zero datetime=True;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

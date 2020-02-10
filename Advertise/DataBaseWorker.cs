@@ -2,7 +2,6 @@
 using System.Data;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-
 namespace Advertise
 {
     /// <summary>

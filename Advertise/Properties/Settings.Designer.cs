@@ -25,7 +25,7 @@ namespace Advertise.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost;Database=advertise;User Id=root;Pwd=;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost;Database=advertise;User Id=root;Pwd=;convert zero datetime=True;")]
         public string connectionString {
             get {
                 return ((string)(this["connectionString"]));
