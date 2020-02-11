@@ -191,5 +191,25 @@ namespace Advertise
         /// <param name="TableName">Название таблицы</param>
         /// <param name="newValues">Словарь полей типа "Поле" - "Значение"</param>
         public void Insert(string TableName, Dictionary<string, string> NewValues) => DB.Insert(TableName, NewValues);
+        public DataTable GetExportTable(string TableName)
+        {
+            DataTable result = new DataTable();
+            result = DB.SelectTable(TableName);
+            if (TableName == "clients")
+            {
+                DataTable temp = DB.MakeQuery("SELECT `Date` FROM `clients`");
+                result.Columns.Remove("Date");
+                result.Columns.Add(new DataColumn("Date"));
+                for(int i = 0; i < result.Rows.Count; i++)
+                {
+                    result.Rows[i]["Date"] = DateTime.Parse(temp.Rows[i][0].ToString()).ToString("d");
+                }
+            }
+            foreach(var pair in ColumnNames(TableName))
+            {
+                result.Columns[pair.Key].ColumnName = pair.Value;
+            }
+            return result;
+        }
     }
 }
