@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Data;
 
 namespace Advertise.Windows
 {
@@ -204,10 +205,27 @@ namespace Advertise.Windows
                 saveFileDialog.Title = $"Сохранение таблицы \"{TableSelector.Text}\"";
                 if(saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    excelWorker.ExportTable(DB.DataBaseWorker.SelectTable(TableNames[TableSelector.Text]), saveFileDialog.FileName);
+                    DataTable dataTable = DB.DataBaseWorker.SelectTable(TableNames[TableSelector.Text]);
+                    dataTable.TableName = TableSelector.Text;
+                    switch (TableNames[TableSelector.Text])
+                    {
+                        case "clients":
+                            foreach(DataRow row in dataTable.Rows)
+                            {
+                                row.ItemArray[3] = row.ItemArray[3].ToString().Remove(10);
+                            }
+                            break;
+                    }
+                    /// Установка имен столбцов
+                    Dictionary<string, string> names = DB.ColumnNames(TableNames[TableSelector.Text]);
+                    foreach (DataColumn col in dataTable.Columns)
+                    {
+                        col.ColumnName = names[col.ColumnName.ToString()];
+                    }
+                    
+                    excelWorker.ExportTable(dataTable, saveFileDialog.FileName);
                 }
             }
-            //excelWorker.ExportTable(null, null);
         }
     }
 

@@ -19,9 +19,27 @@ namespace Advertise
             ex.Visible = true;
             Excel.Workbook book = ex.Workbooks.Add();
             Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
-            sheet.Name = "LOL";
-            MessageBox.Show(table.TableName);
+            sheet.Name = table.TableName;
 
+            int maxRow = table.Rows.Count;
+            int maxCol = table.Columns.Count;
+            // Вывод заголовка таблицы
+            for (int col = 1; col < maxCol + 1; col++)
+            {
+                sheet.Cells[1, col] = table.Columns[col - 1].ColumnName;
+            }
+            // Форматирование заголовка
+            // ....
+            // Вывод содержимого таблицы
+            for(int row = 2; row < maxRow + 2; row++)
+            {
+                for(int col = 1; col < maxCol + 1; col++)
+                {
+                    sheet.Cells[row, col] = table.Rows[row - 2].ItemArray[col - 1].ToString();
+                }
+            }
+            //Форматирование содержимого
+            // ....
         }
     }
 }
