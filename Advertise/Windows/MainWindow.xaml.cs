@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace Advertise.Windows
 {
@@ -23,6 +24,10 @@ namespace Advertise.Windows
         /// Экземпляр для работы с базой данных "Advertise"
         /// </summary>
         public DataBaseSynchronizer DB;
+        /// <summary>
+        /// Экземпляр для работы с файлами Excel
+        /// </summary>
+        public ExcelWorker excelWorker;
         /// <summary>
         /// Список имен таблиц базы данных на русском
         /// </summary>
@@ -51,10 +56,11 @@ namespace Advertise.Windows
         /// Событие не выбранных строк
         /// </summary>
         public event EventHandler RowNotSelected;
-        public MainWindow(DataBaseSynchronizer dataBaseSynchronizer)
+        public MainWindow(DataBaseSynchronizer dataBaseSynchronizer, ExcelWorker excelWorker)
         {
             InitializeComponent();
             DB = dataBaseSynchronizer;
+            this.excelWorker = excelWorker;
             TableNames = DB.GetTableNamesReversed();
             TableSelector.ItemsSource = DB.GetTableNames().Values;
             stater = new StateControllerMainWindow(this);
@@ -75,7 +81,7 @@ namespace Advertise.Windows
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                System.Windows.MessageBox.Show(ex.Message, "Ошибка заполнения таблицы", MessageBoxButton.OK, MessageBoxImage.Error );
             }
         }
         /// <summary>
@@ -98,6 +104,7 @@ namespace Advertise.Windows
         private void TableSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TableSelected(this, e);
+            TableRefreshing(this, e);
         }
         /// <summary>
         /// Функция-обработчик события выбранной таблицы
@@ -154,7 +161,7 @@ namespace Advertise.Windows
                     new AddWindows.Client(DB.DataBaseWorker).ShowDialog();
                     break;
                 default:
-                    MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("Форма добавления записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
             TableRefreshing(this, e);
@@ -176,10 +183,31 @@ namespace Advertise.Windows
                     new EditWindows.Investment(DB.DataBaseWorker, investment.Id).ShowDialog();
                     break;
                 default:
-                    MessageBox.Show("Форма редактирования записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("Форма редактирования записи для этой таблицы не найдена", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
             TableRefreshing(this, e);
+        }
+        /// <summary>
+        /// Обработка события нажатия на кнопку экспорта
+        /// </summary>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="e">Аргументы события</param>
+        private void ButtonExport_Click(object sender, RoutedEventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.FileName = $"{TableSelector.Text}.xlsx";
+                saveFileDialog.Title = $"Сохранение таблицы \"{TableSelector.Text}\"";
+                if(saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    excelWorker.ExportTable(DB.DataBaseWorker.SelectTable(TableNames[TableSelector.Text]), saveFileDialog.FileName);
+                }
+            }
+            //excelWorker.ExportTable(null, null);
         }
     }
 

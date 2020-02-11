@@ -15,13 +15,15 @@ namespace Advertise
     {
         DataBaseWorker dbworker;
         DataBaseSynchronizer synchronizer;
+        ExcelWorker excelWorker;
         public App()
         {
             dbworker = new DataBaseWorker(Advertise.Properties.Settings.Default.connectionString);
             if (CheckConnectionWithDB())
             {
                 synchronizer = new DataBaseSynchronizer(dbworker);
-                new Windows.MainWindow(synchronizer).ShowDialog();
+                excelWorker = new ExcelWorker();
+                new Windows.MainWindow(synchronizer, excelWorker).ShowDialog();
             }
             else
             {

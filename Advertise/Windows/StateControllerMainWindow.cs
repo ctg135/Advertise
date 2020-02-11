@@ -57,9 +57,9 @@ namespace Advertise.Windows
         /// <param name="e">Аргументы события</param>
         private void Item_RowsSelected(object sender, EventArgs e)
         {
+            StateControllerMainWindow_TableSelected(sender, e);
             Item.ButtonEdit.IsEnabled = false;
             Item.ButtonDelete.IsEnabled = true;
-            Item.ButtonAdd.IsEnabled = true;
         }
         /// <summary>
         /// Обраблотчик события выбранной строки
@@ -68,9 +68,9 @@ namespace Advertise.Windows
         /// <param name="e">Аргументы события</param>
         private void Item_RowSelected(object sender, EventArgs e)
         {
+            StateControllerMainWindow_TableSelected(sender, e);
             Item.ButtonEdit.IsEnabled = true;
             Item.ButtonDelete.IsEnabled = true;
-            Item.ButtonAdd.IsEnabled = true;
         }
         /// <summary>
         /// Обраблотчик события выбранной таблицы
@@ -82,7 +82,7 @@ namespace Advertise.Windows
             string selectedTable = Item.TableSelector.SelectedItem.ToString();
             if(selectedTable != string.Empty)
             {
-                Item.SetUpTable(selectedTable);
+                Item.ButtonExport.IsEnabled = true;
                 Item.ButtonAdd.IsEnabled = true;
                 Item.ButtonDelete.IsEnabled = false;
                 Item.ButtonEdit.IsEnabled = false;
@@ -94,6 +94,7 @@ namespace Advertise.Windows
                 Item.ButtonAdd.IsEnabled = false;
                 Item.ButtonDelete.IsEnabled = false;
                 Item.ButtonEdit.IsEnabled = false;
+                Item.ButtonExport.IsEnabled = false;
             }
         }
     }
