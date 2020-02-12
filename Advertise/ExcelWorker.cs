@@ -16,7 +16,7 @@ namespace Advertise
         {
             Excel.Application ex = new Excel.Application();
             ex.SheetsInNewWorkbook = 1;
-            ex.Visible = true;
+            ex.Visible = false;
             Excel.Workbook book = ex.Workbooks.Add();
             Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
             sheet.Name = table.TableName;
@@ -29,9 +29,11 @@ namespace Advertise
                 sheet.Cells[1, col] = table.Columns[col - 1].ColumnName;
             }
             // Форматирование заголовка
-            // ....
+            Excel.Range range1 = sheet.Range[ sheet.Cells[1, 1], sheet.Cells[1, maxCol ] ];
+            range1.Font.Bold = true;
+            range1.EntireColumn.AutoFit();
             // Вывод содержимого таблицы
-            for(int row = 2; row < maxRow + 2; row++)
+            for (int row = 2; row < maxRow + 2; row++)
             {
                 for(int col = 1; col < maxCol + 1; col++)
                 {
@@ -40,6 +42,10 @@ namespace Advertise
             }
             //Форматирование содержимого
             // ....
+            range1 = sheet.Range[sheet.Cells[2, 1], sheet.Cells[maxRow, maxCol]];
+            range1.EntireColumn.AutoFit();
+            ex.Application.ActiveWorkbook.SaveAs(path);
+            ex.Quit();
         }
     }
 }

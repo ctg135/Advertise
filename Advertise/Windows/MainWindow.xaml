@@ -43,7 +43,7 @@
         <Label Content="Выбор таблицы:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="100"/>
         <GroupBox Header="Экспорт и импорт" HorizontalAlignment="Left" Height="124" Margin="475,0,0,0" VerticalAlignment="Top" Width="319">
             <Button x:Name ="ButtonExport" Click="ButtonExport_Click"
-                        Content="Экспортировать таблицу" HorizontalAlignment="Left" 
+                        Content="Экспортировать таблицу в Excel" HorizontalAlignment="Left" 
                         VerticalAlignment="Top" Width="285"
                         IsEnabled="False"
                 Margin="10,10,0,0"

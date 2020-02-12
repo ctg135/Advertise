@@ -207,7 +207,14 @@ namespace Advertise.Windows
                 {
                     DataTable dataTable = DB.GetExportTable(TableNames[TableSelector.Text]);
                     dataTable.TableName = TableSelector.Text;
-                    excelWorker.ExportTable(dataTable, saveFileDialog.FileName);
+                    try
+                    {
+                        excelWorker.ExportTable(dataTable, saveFileDialog.FileName);
+                    }
+                    catch(Exception ex)
+                    {
+                        System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
+                    }
                 }
             }
         }
