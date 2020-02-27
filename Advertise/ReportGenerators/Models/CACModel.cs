@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Advertise.ReportGenerators.Models
 {
-    class CACModel
+    public class CACModel
     {
-
+        public string Source { get; set; }
+        public int CountClients { get; set; }
+        public float CAC { get; set; }
     }
 }

@@ -7,14 +7,41 @@ using System.Data;
 
 namespace Advertise.ReportGenerators
 {
-    abstract class ReoportGenerator
+    public abstract class ReoportGenerator
     {
-        protected DataBaseWorker DB { get; private set; }
-        public ReoportGenerator(DataBaseWorker dataBaseWorker)
+        /// <summary>
+        /// Словарь значений - { Месяц, Номер месяца }
+        /// </summary>
+        protected Dictionary<string, string> Months { get; } = new Dictionary<string, string>()
         {
-            DB = dataBaseWorker;
+            { "Январь" ,   "1" },
+            { "Февраль" ,  "2" },
+            { "Март" ,     "3" },
+            { "Апрель" ,   "4" },
+            { "Май" ,      "5" },
+            { "Июнь" ,     "6" },
+            { "Июль" ,     "7" },
+            { "Август" ,   "8" },
+            { "Сентябрь" , "9" },
+            { "Октябрь" ,  "10" },
+            { "Ноябрь" ,   "11" },
+            { "Декабрь" ,  "12" }
+        };
+        public abstract List<string> Names { get; }
+        protected abstract List<string> names { get; }
+        public string Month { get; set; }
+        protected DataBaseSynchronizer DB { get; private set; }
+        public ReoportGenerator(DataBaseSynchronizer dataBaseSync, string month)
+        {
+            DB = dataBaseSync;
+            Month = month;
+        }
+        public ReoportGenerator(DataBaseSynchronizer dataBaseSync)
+        {
+            DB = dataBaseSync;
         }
         public abstract DataTable GenerateReoport();
         public abstract List<object> GenerateReportAsList();
+        
     }
 }

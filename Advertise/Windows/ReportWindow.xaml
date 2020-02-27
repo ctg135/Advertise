@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Составление отчёта" Height="384" Width="777.5">
     <Grid>
-        <ComboBox HorizontalAlignment="Left" Margin="14,33,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxReportType" HorizontalAlignment="Left" Margin="14,33,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Selected="ComboBoxItem_Selected_CAC">CAC - Стоимость привлечения клиента</ComboBoxItem>
+            <ComboBoxItem Selected="ComboBoxItem_Selected_ROMI">ROMI - Возврат маркейтинговых инвестиций</ComboBoxItem>
+            <ComboBoxItem Selected="ComboBoxItem_Selected_AOV">AOV - Средний доход с пользователя</ComboBoxItem>
+        </ComboBox>
         <ListBox x:Name="ListBoxMonthSelector" HorizontalAlignment="Left" Height="244" Margin="15,92,0,0" VerticalAlignment="Top" Width="119">
             <ListBoxItem>Январь</ListBoxItem>
             <ListBoxItem>Февраль</ListBoxItem>
@@ -22,7 +27,10 @@
             <ListBoxItem>Ноябрь</ListBoxItem>
             <ListBoxItem>Декабрь</ListBoxItem>
         </ListBox>
-        <DataGrid HorizontalAlignment="Left" Height="244" Margin="155,92,0,0" VerticalAlignment="Top" Width="600"/>
+        <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="244" Margin="155,92,0,0" VerticalAlignment="Top" Width="600" 
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"/>
         <Label Content="Тип отчёта:" HorizontalAlignment="Left" Margin="14,7,0,0" VerticalAlignment="Top" Width="114"/>
         <Label Content="Месяц:" HorizontalAlignment="Left" Margin="14,66,0,0" VerticalAlignment="Top" Width="121"/>
         <Button x:Name="ButtonExportSelected" Content="Экспортировать этот отчёт" HorizontalAlignment="Left" Margin="155,34,0,0" VerticalAlignment="Top" Width="241"/>

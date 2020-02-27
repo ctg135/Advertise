@@ -226,7 +226,7 @@ namespace Advertise.Windows
         /// </summary>
         private void ButtonReport_Click(object sender, RoutedEventArgs e)
         {
-            new ReportWindow(DB.DataBaseWorker, excelWorker).ShowDialog();
+            new ReportWindow(DB, excelWorker).ShowDialog();
         }
     }
 
