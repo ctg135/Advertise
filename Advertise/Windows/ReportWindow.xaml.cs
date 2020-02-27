@@ -47,24 +47,26 @@ namespace Advertise.Windows
         private void ComboBoxItem_Selected_CAC(object sender, RoutedEventArgs e)
         {
             SelectedGenerator = new CACReport(DB);
-            SetUpReport();
         }
 
         private void ComboBoxItem_Selected_ROMI(object sender, RoutedEventArgs e)
         {
             //...
-            SetUpReport();
         }
 
         private void ComboBoxItem_Selected_AOV(object sender, RoutedEventArgs e)
         {
-            //
-            SetUpReport();
+            //...
         }
 
         private void ListBoxMonthSelector_Selected(object sender, RoutedEventArgs e)
         {
             SetUpReport();
+        }
+
+        private void ComboBoxReportType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxMonthSelector.SelectedIndex = -1;
         }
     }
 }

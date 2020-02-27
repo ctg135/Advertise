@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Advertise.ReportGenerators.Models;
+using System.Diagnostics;
 
 namespace Advertise.ReportGenerators
 {
@@ -26,11 +27,24 @@ namespace Advertise.ReportGenerators
         }
         public override DataTable GenerateReoport()
         {
-            return new DataTable()
+            DataTable result = new DataTable();
+            foreach (var name in names)
             {
-                Columns = { "a"},
-                Rows =  {"1", "2" }
-            };
+                result.Columns.Add(name);
+            }
+            using (DataTable sources = DB.DataBaseWorker.SelectTable("source"))
+            {
+                foreach(DataRow row in sources.Rows)
+                { 
+                    var count1 = DB.DataBaseWorker.MakeQuery($"SELECT COUNT(`Id`) as `count` FROM `clients` WHERE `Source` = '{row["Id"]}' AND MONTH(`Date`) = '{Months[Month]}'");
+                    var count = count1.Rows.Count == 1 ? int.Parse(count1.Rows[0][0].ToString()) : 0;
+                    var investment1 = DB.DataBaseWorker.MakeQuery($"SELECT `Amount` FROM `investments` WHERE `Source` = '{row["Id"]}' AND `Month` = '{Month}'");
+                    var investment = investment1.Rows.Count == 1 ? int.Parse(investment1.Rows[0][0].ToString()) : 0;
+                    var cac = count != 0 && investment != 0 ? (float)investment / (float)count : 0;
+                    result.Rows.Add(row["Title"], count, cac);
+                }
+            }
+            return result;
         }
 
         public override List<object> GenerateReportAsList()
@@ -41,9 +55,9 @@ namespace Advertise.ReportGenerators
             {
                 result.Add(new CACModel()
                     {
-                        Source = "one",
-                        CountClients = 1,
-                        CAC = (float)1/2
+                        Source = row[0].ToString(),
+                        CountClients = row[1].ToString(),
+                        CAC = row[2].ToString()
                     }                    
                 );
             }

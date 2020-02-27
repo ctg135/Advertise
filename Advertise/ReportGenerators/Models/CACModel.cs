@@ -9,7 +9,7 @@ namespace Advertise.ReportGenerators.Models
     public class CACModel
     {
         public string Source { get; set; }
-        public int CountClients { get; set; }
-        public float CAC { get; set; }
+        public string CountClients { get; set; }
+        public string CAC { get; set; }
     }
 }

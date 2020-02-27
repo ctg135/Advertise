@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         Title="Составление отчёта" Height="384" Width="777.5">
     <Grid>
-        <ComboBox x:Name="ComboBoxReportType" HorizontalAlignment="Left" Margin="14,33,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="ComboBoxReportType" SelectionChanged="ComboBoxReportType_SelectionChanged" HorizontalAlignment="Left" Margin="14,33,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Selected="ComboBoxItem_Selected_CAC">CAC - Стоимость привлечения клиента</ComboBoxItem>
             <ComboBoxItem Selected="ComboBoxItem_Selected_ROMI">ROMI - Возврат маркейтинговых инвестиций</ComboBoxItem>
             <ComboBoxItem Selected="ComboBoxItem_Selected_AOV">AOV - Средний доход с пользователя</ComboBoxItem>
