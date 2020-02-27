@@ -76,7 +76,7 @@ namespace Advertise.Windows
             {
                 if (!string.IsNullOrEmpty(TableName))
                 {
-                    grid.ItemsSource = DB.SelectTable(TableNames[TableName]);
+                    grid.ItemsSource = DB.SelectTableAsList(TableNames[TableName]);
                     SetUpTableNames(TableName);
                 }
             }
@@ -209,9 +209,9 @@ namespace Advertise.Windows
                     dataTable.TableName = TableSelector.Text;
                     try
                     {
-                        excelWorker.ExportTable(dataTable, saveFileDialog.FileName);
+                        excelWorker.ExportTable(TableNames[TableSelector.Text], saveFileDialog.FileName);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
                     }

@@ -60,12 +60,29 @@ namespace Advertise
             return reversed;
         }
         /// <summary>
+        /// Возвращает таблицу из базы данных с форматированными полями и заголовком
+        /// </summary>
+        /// <param name="TableName">Имя таблицы в базе данных</param>
+        /// <returns>Таблицу из базы данных с форматированными полями и заголовком</returns>
+        public DataTable SelectTable (string TableName)
+        {
+            DataTable result = new DataTable();
+
+            result = DB.SelectTable(TableName);
+            foreach(var pair in ColumnNames(TableName))
+            {
+                result.Columns[pair.Key].ColumnName = pair.Value;
+            }
+            result.TableName = GetTableNames()[TableName];
+            return result;
+        }
+        /// <summary>
         /// Возвращает содержимое таблицы из базы данных в виде IEnumerable соответсвующей модели
         /// </summary>
         /// <param name="TableName">Имя таблицы для выборки</param>
         /// <returns>IEnumerable с соответсвующей моделью и содержимым таблицы</returns>
         /// <exception cref="System.Exception">Ошибка запроса, при её наличии</exception>
-        public IEnumerable<object> SelectTable(string TableName)
+        public IEnumerable<object> SelectTableAsList(string TableName)
         {
             switch (TableName.ToLower())
             {
@@ -83,7 +100,7 @@ namespace Advertise
                     return sources;
                 case "investments":
                     Dictionary<int, string> source = new Dictionary<int, string>();
-                    List<Source> sourceDB = (List<Source>)SelectTable("source");
+                    List<Source> sourceDB = (List<Source>)SelectTableAsList("source");
                     foreach(Source sou in sourceDB)
                     {
                         source.Add(sou.Id, sou.Title);
@@ -103,7 +120,7 @@ namespace Advertise
                     return invesments;
                 case "clients":
                     Dictionary<int, string> source1 = new Dictionary<int, string>();
-                    List<Source> sourceDB1 = (List<Source>)SelectTable("source");
+                    List<Source> sourceDB1 = (List<Source>)SelectTableAsList("source");
                     foreach (Source sou in sourceDB1)
                     {
                         source1.Add(sou.Id, sou.Title);

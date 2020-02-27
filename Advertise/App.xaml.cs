@@ -22,7 +22,7 @@ namespace Advertise
             if (CheckConnectionWithDB())
             {
                 synchronizer = new DataBaseSynchronizer(dbworker);
-                excelWorker = new ExcelWorker();
+                excelWorker = new ExcelWorker(synchronizer);
                 new Windows.MainWindow(synchronizer, excelWorker).ShowDialog();
             }
             else

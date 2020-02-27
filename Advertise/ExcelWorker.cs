@@ -12,40 +12,64 @@ namespace Advertise
 {
     public class ExcelWorker
     {
-        public void ExportTable(DataTable table, string path)
+        public DataBaseSynchronizer DB { get; private set; }
+        public ExcelWorker(DataBaseSynchronizer dataBaseSync)
         {
+            DB = dataBaseSync;
+        }
+        public void ExportTable(string TableName, string path)
+        {
+            // Выбор данных из базы данных
+            DataTable table = new DataTable();
+            try
+            {
+                table = DB.SelectTable(TableName);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            // Вывод данных
             Excel.Application ex = new Excel.Application();
-            ex.SheetsInNewWorkbook = 1;
-            ex.Visible = false;
-            Excel.Workbook book = ex.Workbooks.Add();
-            Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
-            sheet.Name = table.TableName;
-
-            int maxRow = table.Rows.Count;
-            int maxCol = table.Columns.Count;
-            // Вывод заголовка таблицы
+            try
+            {
+                ex.SheetsInNewWorkbook = 1;
+                ex.Visible = false;
+                Excel.Workbook book = ex.Workbooks.Add();
+                Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
+                ExportTableToSheet(table, sheet);
+                ex.Application.ActiveWorkbook.SaveAs(path);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                ex.Quit();
+            }
+        }
+        private void ExportTableToSheet(DataTable Table, Excel.Worksheet Sheet)
+        {
+            Sheet.Name = Table.TableName;
+            int maxRow = Table.Rows.Count;
+            int maxCol = Table.Columns.Count;
             for (int col = 1; col < maxCol + 1; col++)
             {
-                sheet.Cells[1, col] = table.Columns[col - 1].ColumnName;
+                Sheet.Cells[1, col] = Table.Columns[col - 1].ColumnName;
             }
-            // Форматирование заголовка
-            Excel.Range range1 = sheet.Range[ sheet.Cells[1, 1], sheet.Cells[1, maxCol ] ];
+            Excel.Range range1 = Sheet.Range[Sheet.Cells[1, 1], Sheet.Cells[1, maxCol]];
             range1.Font.Bold = true;
             range1.EntireColumn.AutoFit();
-            // Вывод содержимого таблицы
             for (int row = 2; row < maxRow + 2; row++)
             {
-                for(int col = 1; col < maxCol + 1; col++)
+                for (int col = 1; col < maxCol + 1; col++)
                 {
-                    sheet.Cells[row, col] = table.Rows[row - 2].ItemArray[col - 1].ToString();
+                    Sheet.Cells[row, col] = Table.Rows[row - 2].ItemArray[col - 1].ToString();
                 }
             }
-            //Форматирование содержимого
-            // ....
-            range1 = sheet.Range[sheet.Cells[2, 1], sheet.Cells[maxRow, maxCol]];
+            range1 = Sheet.Range[Sheet.Cells[2, 1], Sheet.Cells[maxRow, maxCol]];
             range1.EntireColumn.AutoFit();
-            ex.Application.ActiveWorkbook.SaveAs(path);
-            ex.Quit();
         }
     }
 }
