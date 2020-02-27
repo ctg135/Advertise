@@ -99,6 +99,9 @@
     <Compile Include="Models\Investment.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Source.cs" />
+    <Compile Include="ReportGenerators\CACReport.cs" />
+    <Compile Include="ReportGenerators\IReoportGenerator.cs" />
+    <Compile Include="ReportGenerators\Models\CACModel.cs" />
     <Compile Include="Windows\AddWindows\Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
     <Compile Include="ExcelWorker.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StateControllerMainWindow.cs" />
   </ItemGroup>
@@ -179,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\TableIcon.png" />
@@ -192,5 +202,6 @@
   <ItemGroup>
     <Resource Include="Resources\EditRowIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

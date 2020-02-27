@@ -167,6 +167,9 @@ namespace Advertise.Windows
             }
             TableRefreshing(this, e);
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
             switch (TableNames[TableSelector.Text])
@@ -217,6 +220,13 @@ namespace Advertise.Windows
                     }
                 }
             }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ButtonReport_Click(object sender, RoutedEventArgs e)
+        {
+            new ReportWindow(DB.DataBaseWorker, excelWorker).ShowDialog();
         }
     }
 

@@ -20,32 +20,40 @@
                   SelectionChanged="TableSelector_SelectionChanged" Height="23"
                   />
 
-        <GroupBox Header="Действия с записями" HorizontalAlignment="Left" Height="124" Margin="155,0,0,0" VerticalAlignment="Top" Width="315">
-            <Grid HorizontalAlignment="Right" Width="305" Margin="0,0,-2,0">
+        <GroupBox Header="Действия с записями" HorizontalAlignment="Left" Height="124" Margin="155,0,0,0" VerticalAlignment="Top" Width="262">
+            <Grid HorizontalAlignment="Right" Width="233" Margin="-6,0,7,0">
                 <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click" HorizontalAlignment="Left" 
-                    Margin="10,10,0,0" VerticalAlignment="Top" Width="285"
+                    Margin="10,10,0,0" VerticalAlignment="Top" Width="211"
                     IsEnabled="False" Height="20"
                     Content="Добавить запись"
                 />
                 <Button x:Name="ButtonDelete" Content="Удалить выбранные записи"
                     Click="ButtonDelete_Click"
                     HorizontalAlignment="Left" Margin="10,35,0,0" 
-                    VerticalAlignment="Top" Width="285" Height="20"
+                    VerticalAlignment="Top" Width="212" Height="20"
                     IsEnabled="False"
                 />
                 <Button Content="Редактировать запись" x:Name="ButtonEdit"
                     Click="ButtonEdit_Click" IsEnabled="False"
                     HorizontalAlignment="Left" Margin="10,60,0,0" 
-                    VerticalAlignment="Top" Width="285"/>
+                    VerticalAlignment="Top" Width="211"/>
             </Grid>
         </GroupBox>
         <Image x:Name="TableIcon" HorizontalAlignment="Left" Height="62" Margin="39,10,0,0" VerticalAlignment="Top" Width="62" Source="/Resources/TableIcon.png"/>
         <Label Content="Выбор таблицы:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="100"/>
-        <GroupBox Header="Экспорт и импорт" HorizontalAlignment="Left" Height="124" Margin="475,0,0,0" VerticalAlignment="Top" Width="319">
+        <GroupBox Header="Экспорт и импорт" HorizontalAlignment="Left" Height="124" Margin="422,0,0,0" VerticalAlignment="Top" Width="239">
             <Button x:Name ="ButtonExport" Click="ButtonExport_Click"
                         Content="Экспортировать таблицу в Excel" HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" Width="285"
+                        VerticalAlignment="Top" Width="208"
                         IsEnabled="False"
+                Margin="10,10,0,0"
+                />
+        </GroupBox>
+        <GroupBox Header="Анализ данных" HorizontalAlignment="Left" Height="124" Margin="666,0,0,0" VerticalAlignment="Top" Width="238">
+            <Button x:Name ="ButtonReport" Click="ButtonReport_Click"
+                Content="Создать отчёт" HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Width="208"
+                IsEnabled="True"
                 Margin="10,10,0,0"
                 />
         </GroupBox>
