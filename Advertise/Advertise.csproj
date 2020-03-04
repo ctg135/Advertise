@@ -102,6 +102,8 @@
     <Compile Include="ReportGenerators\CACReport.cs" />
     <Compile Include="ReportGenerators\IReoportGenerator.cs" />
     <Compile Include="ReportGenerators\Models\CACModel.cs" />
+    <Compile Include="ReportGenerators\Models\ROMIModel.cs" />
+    <Compile Include="ReportGenerators\ROMIReport.cs" />
     <Compile Include="Windows\AddWindows\Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>

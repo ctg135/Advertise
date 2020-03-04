@@ -23,7 +23,7 @@ namespace Advertise.Windows
     public partial class ReportWindow : Window
     {
         public DataBaseSynchronizer DB { get; private set; }
-        public ReoportGenerator SelectedGenerator { get; set; }
+        public ReportGenerator SelectedGenerator { get; set; }
         public ReportWindow(DataBaseSynchronizer dataBaseSync, ExcelWorker excelWorker)
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace Advertise.Windows
 
         private void ComboBoxItem_Selected_ROMI(object sender, RoutedEventArgs e)
         {
-            //...
+            SelectedGenerator = new ROMIReport(DB);
         }
 
         private void ComboBoxItem_Selected_AOV(object sender, RoutedEventArgs e)
@@ -67,6 +67,7 @@ namespace Advertise.Windows
         private void ComboBoxReportType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBoxMonthSelector.SelectedIndex = -1;
+            SetUpReport();
         }
     }
 }

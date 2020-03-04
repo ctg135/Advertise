@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Advertise.ReportGenerators.Models;
-using System.Diagnostics;
 
 namespace Advertise.ReportGenerators
 {
-    class CACReport : ReoportGenerator
+    class CACReport : ReportGenerator
     {
         protected override List<string> names { get; } = new List<string>() { "Источник", "Количество клиентов", "Показатель CAC" };
         public override List<string> Names
@@ -18,13 +13,7 @@ namespace Advertise.ReportGenerators
             {
                 return names;
             }
-        }
-        public CACReport(DataBaseSynchronizer dataBaseSync, string month) : base(dataBaseSync, month)
-        {
-        }
-        public CACReport(DataBaseSynchronizer dataBaseSync) : base(dataBaseSync)
-        {
-        }
+        }       
         public override DataTable GenerateReoport()
         {
             DataTable result = new DataTable();
@@ -55,16 +44,21 @@ namespace Advertise.ReportGenerators
             {
                 result.Add(new CACModel()
                     {
-                        Source = row[0].ToString(),
-                        CountClients = row[1].ToString(),
-                        CAC = row[2].ToString()
+                        Source       = row[names[0]].ToString(),
+                        CountClients = row[names[1]].ToString(),
+                        CAC          = row[names[2]].ToString()
                     }                    
                 );
             }
 
             return result;
         }
+        public CACReport(DataBaseSynchronizer dataBaseSync, string month) : base(dataBaseSync, month)
+        {
+        }
+        public CACReport(DataBaseSynchronizer dataBaseSync) : base(dataBaseSync)
+        {
+        }
 
-        
     }
 }
