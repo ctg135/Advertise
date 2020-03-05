@@ -4,8 +4,14 @@ using Advertise.ReportGenerators.Models;
 
 namespace Advertise.ReportGenerators
 {
+    /// <summary>
+    /// Класс создания ROMI отчёта
+    /// </summary>
     public class ROMIReport : ReportGenerator
     {
+        /// <summary>
+        /// Список названий полей отчёта
+        /// </summary>
         public override List<string> Names
         {
             get
@@ -13,7 +19,9 @@ namespace Advertise.ReportGenerators
                 return names;
             }
         }
-
+        /// <summary>
+        /// Поля отчёта
+        /// </summary>
         protected override List<string> names { get; } = new List<string>()
         {
             "Источник",
@@ -21,7 +29,10 @@ namespace Advertise.ReportGenerators
             "Расход на источник",
             "Показатель ROMI"
         };
-
+        /// <summary>
+        /// Функция создания отчёта
+        /// </summary>
+        /// <returns>Таблица с отчетом</returns>
         public override DataTable GenerateReoport()
         {
             DataTable result = new DataTable();
@@ -45,7 +56,10 @@ namespace Advertise.ReportGenerators
 
             return result;
         }
-
+        /// <summary>
+        /// Функция создания отчёта в виде списка
+        /// </summary>
+        /// <returns>Список с отчетом</returns>
         public override List<object> GenerateReportAsList()
         {
             List<object> result = new List<object>();

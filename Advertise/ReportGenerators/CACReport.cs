@@ -4,16 +4,34 @@ using Advertise.ReportGenerators.Models;
 
 namespace Advertise.ReportGenerators
 {
+    /// <summary>
+    /// Класс создания CAC отчета
+    /// </summary>
     class CACReport : ReportGenerator
     {
-        protected override List<string> names { get; } = new List<string>() { "Источник", "Количество клиентов", "Показатель CAC" };
+        /// <summary>
+        /// Поля отчёта
+        /// </summary>
+        protected override List<string> names { get; } = new List<string>() 
+        { 
+            "Источник",
+            "Количество клиентов",
+            "Показатель CAC" 
+        };
+        /// <summary>
+        /// Названия полей отчёта
+        /// </summary>
         public override List<string> Names
         {
             get
             {
                 return names;
             }
-        }       
+        }
+        /// <summary>
+        /// Создание отчета в виде таблицы
+        /// </summary>
+        /// <returns>Таблица с отчётом</returns>
         public override DataTable GenerateReoport()
         {
             DataTable result = new DataTable();
@@ -35,7 +53,10 @@ namespace Advertise.ReportGenerators
             }
             return result;
         }
-
+        /// <summary>
+        /// Генерация отчета в виде списка
+        /// </summary>
+        /// <returns>Список с отчётом</returns>
         public override List<object> GenerateReportAsList()
         {
             List<object> result = new List<object>();

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Advertise.ReportGenerators.Models;
 
 namespace Advertise.ReportGenerators
 {
+    /// <summary>
+    /// Класс создания AOV отчёта
+    /// </summary>
     public class AOVReport : ReportGenerator
     {
         public AOVReport(DataBaseSynchronizer dataBaseSync) : base(dataBaseSync)
@@ -17,7 +16,9 @@ namespace Advertise.ReportGenerators
         public AOVReport(DataBaseSynchronizer dataBaseSync, string month) : base(dataBaseSync, month)
         {
         }
-
+        /// <summary>
+        /// Названия колонок отчета
+        /// </summary>
         public override List<string> Names
         {
             get
@@ -25,7 +26,9 @@ namespace Advertise.ReportGenerators
                 return names;
             }
         }
-
+        /// <summary>
+        /// Название полей отчета
+        /// </summary>
         protected override List<string> names { get; } = new List<string>() 
         {
             "Источник",
@@ -33,7 +36,10 @@ namespace Advertise.ReportGenerators
             "Количество клиентов",
             "Показатель AOV",
         };
-
+        /// <summary>
+        /// Создание отчета в виде таблицы
+        /// </summary>
+        /// <returns>Таблица с отчётом</returns>
         public override DataTable GenerateReoport()
         {
             DataTable result = new DataTable();
@@ -57,7 +63,10 @@ namespace Advertise.ReportGenerators
 
             return result;
         }
-
+        /// <summary>
+        /// Генерация отчета в виде списка
+        /// </summary>
+        /// <returns>Список с отчётом</returns>
         public override List<object> GenerateReportAsList()
         {
             List<object> result = new List<object>();

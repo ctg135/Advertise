@@ -3,6 +3,9 @@ using System.Data;
 
 namespace Advertise.ReportGenerators
 {
+    /// <summary>
+    /// Абстрактный класс для создания отчётов по таблицам
+    /// </summary>
     public abstract class ReportGenerator
     {
         /// <summary>
@@ -32,12 +35,24 @@ namespace Advertise.ReportGenerators
         /// Месяц составления отчёта
         /// </summary>
         public string Month { get; set; }
+        /// <summary>
+        /// Экземпляр для взаимодействия с базой данных
+        /// </summary>
         protected DataBaseSynchronizer DB { get; private set; }
+        /// <summary>
+        /// Конструктор создания экземпляра
+        /// </summary>
+        /// <param name="dataBaseSync">Интерфейс взаимодействия с базой данных</param>
+        /// <param name="month">Месяц построения отчёта</param>
         public ReportGenerator(DataBaseSynchronizer dataBaseSync, string month)
         {
             DB = dataBaseSync;
             Month = month;
         }
+        /// <summary>
+        /// Конструктор создания экземпляра
+        /// </summary>
+        /// <param name="dataBaseSync">Интерфейс взаимодействия с базой данных</param>
         public ReportGenerator(DataBaseSynchronizer dataBaseSync)
         {
             DB = dataBaseSync;
@@ -50,7 +65,7 @@ namespace Advertise.ReportGenerators
         /// <summary>
         /// Генерация отчета в виде списка
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Список с отчётом</returns>
         public abstract List<object> GenerateReportAsList();
         
     }

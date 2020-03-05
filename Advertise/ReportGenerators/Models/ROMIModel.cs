@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Advertise.ReportGenerators.Models
+﻿namespace Advertise.ReportGenerators.Models
 {
+    /// <summary>
+    /// Представление данных отчёта ROMI
+    /// </summary>
     public class ROMIModel
     {
+        /// <summary>
+        /// Источник рекламы
+        /// </summary>
         public string Source { get; set; }
+        /// <summary>
+        /// Общая прибыль с источника
+        /// </summary>
         public string Profit { get; set; }
+        /// <summary>
+        /// Общаие расходы на источник
+        /// </summary>
         public string Cost   { get; set; }
+        /// <summary>
+        /// Показатель ROMI
+        /// </summary>
         public string ROMI   { get; set; }
     }
 }
