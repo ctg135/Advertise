@@ -22,6 +22,7 @@ namespace Advertise.Windows
     /// </summary>
     public partial class ReportWindow : Window
     {
+        public ExcelWorker EW { get; private set; }
         public DataBaseSynchronizer DB { get; private set; }
         public ReportGenerator SelectedGenerator { get; set; }
         public ReportWindow(DataBaseSynchronizer dataBaseSync, ExcelWorker excelWorker)
@@ -29,6 +30,7 @@ namespace Advertise.Windows
             InitializeComponent();
             DB = dataBaseSync;
             ListBoxMonthSelector.SelectionChanged += ListBoxMonthSelector_Selected;
+            this.EW = excelWorker;
         }
         public void SetUpReport()
         {
@@ -42,6 +44,8 @@ namespace Advertise.Windows
                 {
                     grid.Columns[i].Header = cols[i];
                 }
+
+                ButtonExportSelected.IsEnabled = true;
             }
         }
         private void ComboBoxItem_Selected_CAC(object sender, RoutedEventArgs e)
@@ -67,7 +71,13 @@ namespace Advertise.Windows
         private void ComboBoxReportType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBoxMonthSelector.SelectedIndex = -1;
+            ButtonExportSelected.IsEnabled = false;
             SetUpReport();
+        }
+
+        private void ButtonExportSelected_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
