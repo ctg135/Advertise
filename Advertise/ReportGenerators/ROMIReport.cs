@@ -41,6 +41,8 @@ namespace Advertise.ReportGenerators
                 result.Columns.Add(name);
             }
 
+            result.TableName = $"Отчёт ROMI за {Month}";
+
             using (DataTable sources = DB.DataBaseWorker.SelectTable("source"))
             {
                 foreach (DataRow row in sources.Rows)
