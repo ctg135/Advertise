@@ -56,7 +56,7 @@ namespace Advertise.Windows
 
         private void ComboBoxItem_Selected_AOV(object sender, RoutedEventArgs e)
         {
-            //...
+            SelectedGenerator = new AOVReport(DB);
         }
 
         private void ListBoxMonthSelector_Selected(object sender, RoutedEventArgs e)

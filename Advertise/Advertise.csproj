@@ -99,8 +99,10 @@
     <Compile Include="Models\Investment.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Source.cs" />
+    <Compile Include="ReportGenerators\AOVReport.cs" />
     <Compile Include="ReportGenerators\CACReport.cs" />
     <Compile Include="ReportGenerators\IReoportGenerator.cs" />
+    <Compile Include="ReportGenerators\Models\AOVModel.cs" />
     <Compile Include="ReportGenerators\Models\CACModel.cs" />
     <Compile Include="ReportGenerators\Models\ROMIModel.cs" />
     <Compile Include="ReportGenerators\ROMIReport.cs" />
