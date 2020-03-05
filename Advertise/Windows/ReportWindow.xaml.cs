@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using Advertise.ReportGenerators;
 using Advertise.ReportGenerators.Models;
+using System.Windows.Forms;
+using System.Data;
 
 namespace Advertise.Windows
 {
@@ -77,7 +79,28 @@ namespace Advertise.Windows
 
         private void ButtonExportSelected_Click(object sender, RoutedEventArgs e)
         {
-
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                string selectedMonth = ((ListBoxItem)ListBoxMonthSelector.SelectedItem).Content.ToString();
+                SelectedGenerator.Month = selectedMonth;
+                DataTable exp = SelectedGenerator.GenerateReoport();
+                saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.FileName = $"{exp.TableName}.xlsx";
+                saveFileDialog.Title = $"Сохранение отчёта \"{exp.TableName}\"";
+                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    try
+                    {
+                        EW.ExportTable(exp, saveFileDialog.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
+                    }
+                }
+            }
         }
     }
 }

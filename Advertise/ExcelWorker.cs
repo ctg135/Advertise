@@ -17,6 +17,27 @@ namespace Advertise
         {
             DB = dataBaseSync;
         }
+        public void ExportTable(DataTable Table, string path)
+        {
+            Excel.Application ex = new Excel.Application();
+            try
+            {
+                ex.SheetsInNewWorkbook = 1;
+                ex.Visible = false;
+                Excel.Workbook book = ex.Workbooks.Add();
+                Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
+                ExportTableToSheet(Table, sheet);
+                ex.Application.ActiveWorkbook.SaveAs(path);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                ex.Quit();
+            }
+        }
         public void ExportTable(string TableName, string path)
         {
             // Выбор данных из базы данных
