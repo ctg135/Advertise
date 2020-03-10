@@ -35,7 +35,7 @@ namespace Advertise
             }
             finally
             {
-                ex.Quit();
+                ex.Quit();                
             }
         }
         public void ExportTable(string TableName, string path)

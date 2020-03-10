@@ -58,7 +58,7 @@ namespace Advertise.ReportGenerators
                     var profit = (temp.Rows.Count == 1 && temp.Rows[0][0].ToString() != string.Empty) ? int.Parse(temp.Rows[0][0].ToString()) : 0;
                     temp = DB.DataBaseWorker.MakeQuery($"SELECT Count(`Id`) FROM `clients` WHERE `Source` = '{row["Id"]}' AND Month(`Date`) = '{Months[Month]}'");
                     var countOfClient = (temp.Rows.Count == 1 && temp.Rows[0][0].ToString() != string.Empty) ? int.Parse(temp.Rows[0][0].ToString()) : 0;
-                    var aov =  countOfClient != 0 ? (float)profit / (float)countOfClient : 0;
+                    int aov = countOfClient != 0 ? profit / countOfClient : 0;
                     result.Rows.Add(row["Title"], profit, countOfClient, aov);
                 }
             }

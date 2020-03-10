@@ -99,6 +99,7 @@ namespace Advertise.Windows
                     {
                         System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
                     }
+                    System.Windows.MessageBox.Show("Экспорт завершен!");
                 }
             }
         }

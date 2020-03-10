@@ -218,6 +218,7 @@ namespace Advertise.Windows
                     {
                         System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
                     }
+                    MessageBox.Show("Экспорт завершен!");
                 }
             }
         }

@@ -50,7 +50,7 @@ namespace Advertise.ReportGenerators
                     var count = count1.Rows.Count == 1 ? int.Parse(count1.Rows[0][0].ToString()) : 0;
                     var investment1 = DB.DataBaseWorker.MakeQuery($"SELECT `Amount` FROM `investments` WHERE `Source` = '{row["Id"]}' AND `Month` = '{Month}'");
                     var investment = investment1.Rows.Count == 1 ? int.Parse(investment1.Rows[0][0].ToString()) : 0;
-                    var cac = count != 0 && investment != 0 ? (float)investment / (float)count : 0;
+                    int cac = count != 0 && investment != 0 ? investment / count : 0;
                     result.Rows.Add(row["Title"], count, cac);
                 }
             }
