@@ -50,12 +50,20 @@
                 />
         </GroupBox>
         <GroupBox Header="Анализ данных" HorizontalAlignment="Left" Height="124" Margin="666,0,0,0" VerticalAlignment="Top" Width="238">
-            <Button x:Name ="ButtonReport" Click="ButtonReport_Click"
+            <Grid Margin="-4,4,-6,-6">
+                <Button x:Name ="ButtonReport" Click="ButtonReport_Click"
                 Content="Создать отчёт" HorizontalAlignment="Left" 
-                VerticalAlignment="Top" Width="208"
+                VerticalAlignment="Top" Width="196"
                 IsEnabled="True"
-                Margin="10,10,0,0"
+                Margin="20,11,0,0"
                 />
+                <Button x:Name ="ButtonReportTotal" Click="ButtonReportTotal_Click"
+                    Content="Экспорт подробного отчёта" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" Width="196"
+                    IsEnabled="True"
+                    Margin="20,37,0,0"
+                />
+            </Grid>
         </GroupBox>
     </Grid>
 </Window>

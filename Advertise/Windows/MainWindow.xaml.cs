@@ -218,7 +218,7 @@ namespace Advertise.Windows
                     {
                         System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
                     }
-                    MessageBox.Show("Экспорт завершен!");
+                    System.Windows.MessageBox.Show("Экспорт завершен!");
                 }
             }
         }
@@ -228,6 +228,11 @@ namespace Advertise.Windows
         private void ButtonReport_Click(object sender, RoutedEventArgs e)
         {
             new ReportWindow(DB, excelWorker).ShowDialog();
+        }
+
+        private void ButtonReportTotal_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

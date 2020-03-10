@@ -17,7 +17,31 @@ namespace Advertise
         {
             DB = dataBaseSync;
         }
-        public void ExportTable(DataTable Table, string path)
+        public void ExportTables(DataTable[] Tables, string Path)
+        {
+            Excel.Application ex = new Excel.Application();
+            try
+            {
+                ex.SheetsInNewWorkbook = Tables.Length;
+                ex.Visible = false;
+                Excel.Workbook book = ex.Workbooks.Add();
+                for (int i = 0; i < Tables.Length; i++)
+                {
+                    Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(i + 1);
+                    ExportTableToSheet(Tables[i], sheet);
+                }
+                ex.Application.ActiveWorkbook.SaveAs(Path);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                ex.Quit();
+            }
+        }
+        public void ExportTable(DataTable Table, string Path)
         {
             Excel.Application ex = new Excel.Application();
             try
@@ -27,7 +51,7 @@ namespace Advertise
                 Excel.Workbook book = ex.Workbooks.Add();
                 Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
                 ExportTableToSheet(Table, sheet);
-                ex.Application.ActiveWorkbook.SaveAs(path);
+                ex.Application.ActiveWorkbook.SaveAs(Path);
             }
             catch (Exception e)
             {
@@ -38,7 +62,7 @@ namespace Advertise
                 ex.Quit();                
             }
         }
-        public void ExportTable(string TableName, string path)
+        public void ExportTable(string TableName, string Path)
         {
             // Выбор данных из базы данных
             DataTable table = new DataTable();
@@ -59,7 +83,7 @@ namespace Advertise
                 Excel.Workbook book = ex.Workbooks.Add();
                 Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
                 ExportTableToSheet(table, sheet);
-                ex.Application.ActiveWorkbook.SaveAs(path);
+                ex.Application.ActiveWorkbook.SaveAs(Path);
             }
             catch (Exception e)
             {
