@@ -232,7 +232,7 @@ namespace Advertise.Windows
 
         private void ButtonReportTotal_Click(object sender, RoutedEventArgs e)
         {
-
+            new TotalReportWIndow(DB, excelWorker).ShowDialog();
         }
     }
 

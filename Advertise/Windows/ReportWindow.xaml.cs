@@ -26,7 +26,7 @@ namespace Advertise.Windows
     {
         public ExcelWorker EW { get; private set; }
         public DataBaseSynchronizer DB { get; private set; }
-        public ReportGenerator SelectedGenerator { get; set; }
+        public IReportGenerator SelectedGenerator { get; set; }
         public ReportWindow(DataBaseSynchronizer dataBaseSync, ExcelWorker excelWorker)
         {
             InitializeComponent();

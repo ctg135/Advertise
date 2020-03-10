@@ -7,7 +7,7 @@ namespace Advertise.ReportGenerators
     /// <summary>
     /// Класс создания AOV отчёта
     /// </summary>
-    public class AOVReport : ReportGenerator
+    public class AOVReport : IReportGenerator
     {
         public AOVReport(DataBaseSynchronizer dataBaseSync) : base(dataBaseSync)
         {

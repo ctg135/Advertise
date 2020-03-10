@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
+using Advertise.ReportGenerators;
 
 
 namespace Advertise

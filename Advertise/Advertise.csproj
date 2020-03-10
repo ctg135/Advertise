@@ -101,7 +101,7 @@
     <Compile Include="Models\Source.cs" />
     <Compile Include="ReportGenerators\AOVReport.cs" />
     <Compile Include="ReportGenerators\CACReport.cs" />
-    <Compile Include="ReportGenerators\ReportGenerator.cs" />
+    <Compile Include="ReportGenerators\IReportGenerator.cs" />
     <Compile Include="ReportGenerators\Models\AOVModel.cs" />
     <Compile Include="ReportGenerators\Models\CACModel.cs" />
     <Compile Include="ReportGenerators\Models\ROMIModel.cs" />
@@ -132,6 +132,9 @@
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StateControllerMainWindow.cs" />
+    <Compile Include="Windows\TotalReportWIndow.xaml.cs">
+      <DependentUpon>TotalReportWIndow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TotalReportWIndow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

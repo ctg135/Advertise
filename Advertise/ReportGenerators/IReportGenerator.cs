@@ -6,7 +6,7 @@ namespace Advertise.ReportGenerators
     /// <summary>
     /// Абстрактный класс для создания отчётов по таблицам
     /// </summary>
-    public abstract class ReportGenerator
+    public abstract class IReportGenerator
     {
         /// <summary>
         /// Словарь значений - { Месяц, Номер месяца }
@@ -44,7 +44,7 @@ namespace Advertise.ReportGenerators
         /// </summary>
         /// <param name="dataBaseSync">Интерфейс взаимодействия с базой данных</param>
         /// <param name="month">Месяц построения отчёта</param>
-        public ReportGenerator(DataBaseSynchronizer dataBaseSync, string month)
+        public IReportGenerator(DataBaseSynchronizer dataBaseSync, string month)
         {
             DB = dataBaseSync;
             Month = month;
@@ -53,7 +53,7 @@ namespace Advertise.ReportGenerators
         /// Конструктор создания экземпляра
         /// </summary>
         /// <param name="dataBaseSync">Интерфейс взаимодействия с базой данных</param>
-        public ReportGenerator(DataBaseSynchronizer dataBaseSync)
+        public IReportGenerator(DataBaseSynchronizer dataBaseSync)
         {
             DB = dataBaseSync;
         }

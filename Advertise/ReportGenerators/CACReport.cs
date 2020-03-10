@@ -7,7 +7,7 @@ namespace Advertise.ReportGenerators
     /// <summary>
     /// Класс создания CAC отчета
     /// </summary>
-    class CACReport : ReportGenerator
+    class CACReport : IReportGenerator
     {
         /// <summary>
         /// Поля отчёта

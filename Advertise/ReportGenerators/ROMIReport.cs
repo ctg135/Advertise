@@ -7,7 +7,7 @@ namespace Advertise.ReportGenerators
     /// <summary>
     /// Класс создания ROMI отчёта
     /// </summary>
-    public class ROMIReport : ReportGenerator
+    public class ROMIReport : IReportGenerator
     {
         /// <summary>
         /// Список названий полей отчёта
