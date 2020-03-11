@@ -74,6 +74,8 @@ namespace Advertise.Windows
         {
             ListBoxMonthSelector.SelectedIndex = -1;
             ButtonExportSelected.IsEnabled = false;
+            grid.Columns.Clear();
+            grid.ItemsSource = null;
             SetUpReport();
         }
 

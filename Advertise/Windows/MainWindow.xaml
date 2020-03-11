@@ -20,36 +20,30 @@
                   SelectionChanged="TableSelector_SelectionChanged" Height="23"
                   />
 
-        <GroupBox Header="Действия с записями" HorizontalAlignment="Left" Height="124" Margin="155,0,0,0" VerticalAlignment="Top" Width="262">
-            <Grid HorizontalAlignment="Right" Width="233" Margin="-6,0,7,0">
-                <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click" HorizontalAlignment="Left" 
-                    Margin="10,10,0,0" VerticalAlignment="Top" Width="211"
-                    IsEnabled="False" Height="20"
-                    Content="Добавить запись"
+        <GroupBox Header="Действия с записями" HorizontalAlignment="Left" Height="124" Margin="155,0,0,0" VerticalAlignment="Top" Width="454">
+            <Grid Margin="-6,0,-1,0">
+                <Button x:Name ="ButtonAdd" Click="ButtonAdd_Click" 
+                    Margin="9,11,0,70"
+                    IsEnabled="False"
+                    Content="Добавить запись" HorizontalAlignment="Left" Width="211"
                 />
                 <Button x:Name="ButtonDelete" Content="Удалить выбранные записи"
-                    Click="ButtonDelete_Click"
-                    HorizontalAlignment="Left" Margin="10,35,0,0" 
-                    VerticalAlignment="Top" Width="212" Height="20"
-                    IsEnabled="False"
+                    Click="ButtonDelete_Click" Margin="10,35,0,46"
+                    IsEnabled="False" HorizontalAlignment="Left" Width="210"
                 />
                 <Button Content="Редактировать запись" x:Name="ButtonEdit"
-                    Click="ButtonEdit_Click" IsEnabled="False"
-                    HorizontalAlignment="Left" Margin="10,60,0,0" 
-                    VerticalAlignment="Top" Width="211"/>
+                    Click="ButtonEdit_Click" IsEnabled="False" Margin="9,61,0,20" HorizontalAlignment="Left" Width="211"/>
+                <Button x:Name ="ButtonExport" Click="ButtonExport_Click"
+                        Content="Экспортировать таблицу в Excel" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="208"
+                        IsEnabled="False"
+                Margin="235,11,0,0"
+                />
             </Grid>
         </GroupBox>
         <Image x:Name="TableIcon" HorizontalAlignment="Left" Height="62" Margin="39,10,0,0" VerticalAlignment="Top" Width="62" Source="/Resources/TableIcon.png"/>
         <Label Content="Выбор таблицы:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Width="100"/>
-        <GroupBox Header="Экспорт и импорт" HorizontalAlignment="Left" Height="124" Margin="422,0,0,0" VerticalAlignment="Top" Width="239">
-            <Button x:Name ="ButtonExport" Click="ButtonExport_Click"
-                        Content="Экспортировать таблицу в Excel" HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" Width="208"
-                        IsEnabled="False"
-                Margin="10,10,0,0"
-                />
-        </GroupBox>
-        <GroupBox Header="Анализ данных" HorizontalAlignment="Left" Height="124" Margin="666,0,0,0" VerticalAlignment="Top" Width="238">
+        <GroupBox Header="Анализ данных" HorizontalAlignment="Left" Height="124" Margin="616,-1,0,0" VerticalAlignment="Top" Width="238">
             <Grid Margin="-4,4,-6,-6">
                 <Button x:Name ="ButtonReport" Click="ButtonReport_Click"
                 Content="Создать отчёт" HorizontalAlignment="Left" 
