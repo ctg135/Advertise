@@ -16,12 +16,9 @@ using System.Windows.Shapes;
 using Advertise.ReportGenerators;
 using System.Data;
 
-using System.Diagnostics;
-
 namespace Advertise.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для TotalReportWIndow.xaml
     /// </summary>
     public partial class TotalReportWIndow : Window
     {
@@ -29,18 +26,39 @@ namespace Advertise.Windows
         public DataBaseSynchronizer DB { get; private set; }
         public TotalReportWIndow(DataBaseSynchronizer dataBaseSync, ExcelWorker excelWorker)
         {
-            InitializeComponent();
             DB = dataBaseSync;
             EW = excelWorker;
+
+            InitializeComponent();
+
+            foreach (Controls.ListBoxItem item in ListBoxMonths.Items)
+            {
+                ((Controls.CheckBox)item.Content).Click += CheckButtonExportState;
+            }
+
+            foreach(Controls.ListBoxItem item in ListBoxReports.Items)
+            {
+                ((Controls.CheckBox)item.Content).Click += CheckButtonExportState;
+            }
+
+            CheckButtonExportState(this, new RoutedEventArgs());
         }
         
         private void ButtonCheckMonths_Click     (object sender, RoutedEventArgs e) => SetAllListBoxItemsToState(ListBoxMonths, true);
 
-        private void ButtonNonCheckMonths_Click  (object sender, RoutedEventArgs e) => SetAllListBoxItemsToState(ListBoxMonths, false);
+        private void ButtonNonCheckMonths_Click(object sender, RoutedEventArgs e)
+        {
+            SetAllListBoxItemsToState(ListBoxMonths, false);
+            CheckButtonExportState(this, new RoutedEventArgs());
+        }
 
         private void ButtonCheckReports_Click    (object sender, RoutedEventArgs e) => SetAllListBoxItemsToState(ListBoxReports, true);
 
-        private void ButtonNonCheckReports_Click (object sender, RoutedEventArgs e) => SetAllListBoxItemsToState(ListBoxReports, false);
+        private void ButtonNonCheckReports_Click(object sender, RoutedEventArgs e)
+        {
+            SetAllListBoxItemsToState(ListBoxReports, false);
+            CheckButtonExportState(this, new RoutedEventArgs());
+        }
 
         private void SetAllListBoxItemsToState(Controls.ListBox ListBox, bool State)
         {
@@ -49,7 +67,37 @@ namespace Advertise.Windows
                 Controls.CheckBox box = (Controls.CheckBox)item.Content;
                 box.IsChecked = State;
             }
+            ListBox.SelectedIndex = -1;
         }
+
+        private void CheckButtonExportState(object sender, RoutedEventArgs e)
+        {
+            bool AnyMonthSelected = false;
+            bool AnyReportSelected = false;
+
+            foreach (Controls.ListBoxItem item in ListBoxMonths.Items)
+            {
+                if ( (bool)((Controls.CheckBox)item.Content).IsChecked )
+                {
+                    AnyMonthSelected = true;
+                    break;
+                }
+            }
+
+            foreach (Controls.ListBoxItem item in ListBoxReports.Items)
+            {
+                if ( (bool)((Controls.CheckBox)item.Content).IsChecked )
+                {
+                    AnyReportSelected = true;
+                    break;
+                }
+            }
+
+            ButtonExport.IsEnabled = AnyMonthSelected && AnyReportSelected;
+        }
+
+
+        
 
         private void ButtonExport_Click(object sender, RoutedEventArgs e)
         {
@@ -88,6 +136,8 @@ namespace Advertise.Windows
                             }
                         }
 
+                        if (Months.Count == 0 || ReportTypes.Count == 0) throw new Exception("Отчёт не выбран!");
+
                         foreach (string month in Months)
                         {
                             foreach (string reportType in ReportTypes)
@@ -106,19 +156,12 @@ namespace Advertise.Windows
                                 }
                             }
                         }
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        foreach (IReportGenerator report in Reports)
-                        {
-                            Debug.WriteLine($"{report} {report.Month}");
-                        }
-
                         List<DataTable> tables = new List<DataTable>();
 
                         foreach (IReportGenerator report in Reports)
                         {
                             tables.Add(report.GenerateReoport());
                         }
-
 
                         EW.ExportTables(tables.ToArray(), saveFileDialog.FileName);
                     }

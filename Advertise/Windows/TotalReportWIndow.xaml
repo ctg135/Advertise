@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advertise.Windows"
         mc:Ignorable="d"
-        Title="Создание подробного отчёта" Height="450" Width="800">
+        Title="Создание подробного отчёта" Height="395" Width="550">
     <Grid>
-        <GroupBox Header="Выбор месяцев" HorizontalAlignment="Left" Height="319" Margin="51,46,0,0" VerticalAlignment="Top" Width="221">
+        <GroupBox Header="Выбор месяцев" HorizontalAlignment="Left" Height="319" Margin="23,24,0,0" VerticalAlignment="Top" Width="221">
             <Grid Margin="0,-1,0,0">
                 <ListBox x:Name="ListBoxMonths" HorizontalAlignment="Left" Height="215" Margin="13,8,0,0" VerticalAlignment="Top" Width="182">
                     <ListBoxItem>
@@ -49,7 +49,7 @@
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Выбор отчётов" HorizontalAlignment="Right" Height="166" Margin="0,134,264,0" VerticalAlignment="Top" Width="221">
+        <GroupBox Header="Выбор отчётов" HorizontalAlignment="Left" Height="166" Margin="271,43,0,0" VerticalAlignment="Top" Width="221">
             <Grid Margin="0,-1,0,0">
                 <ListBox x:Name="ListBoxReports" HorizontalAlignment="Left" Height="62" Margin="13,8,0,0" VerticalAlignment="Top" Width="182">
                     <ListBoxItem>
@@ -66,6 +66,6 @@
                 <Button x:Name="ButtonNonCheckReports" Content="Снять выделение" Click="ButtonNonCheckReports_Click"  HorizontalAlignment="Left" Margin="13,115,0,0" VerticalAlignment="Top" Width="182"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="ButtonExport" Content="Составить и экспортировать" Click="ButtonExport_Click" HorizontalAlignment="Left" Margin="574,209,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="ButtonExport" Content="Составить и экспортировать" Click="ButtonExport_Click" HorizontalAlignment="Left" Margin="291,266,0,0" VerticalAlignment="Top" Width="175"/>
     </Grid>
 </Window>

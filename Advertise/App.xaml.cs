@@ -23,7 +23,6 @@ namespace Advertise
             {
                 synchronizer = new DataBaseSynchronizer(dbworker);
                 excelWorker = new ExcelWorker(synchronizer);
-               // new Windows.TotalReportWIndow(synchronizer, excelWorker).ShowDialog();
                 new Windows.MainWindow(synchronizer, excelWorker).Show();
             }
             else
