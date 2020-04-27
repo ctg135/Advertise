@@ -1,3 +1,5 @@
 /.vs/*
 /Advertise/bin/*
 /Advertise/obj/*
+*/Release/*
+*/Debug/*
