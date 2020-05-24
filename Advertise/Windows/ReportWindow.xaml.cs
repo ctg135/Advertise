@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Advertise.ReportGenerators;
+using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using Advertise.ReportGenerators;
-using Advertise.ReportGenerators.Models;
 using System.Windows.Forms;
-using System.Data;
 
 namespace Advertise.Windows
 {
@@ -34,6 +22,9 @@ namespace Advertise.Windows
             ListBoxMonthSelector.SelectionChanged += ListBoxMonthSelector_Selected;
             this.EW = excelWorker;
         }
+        /// <summary>
+        /// Производит вывод таблицы отчета
+        /// </summary>
         public void SetUpReport()
         {
             if(ListBoxMonthSelector.SelectedItems.Count == 1 && ComboBoxReportType.Text != string.Empty)
@@ -50,26 +41,37 @@ namespace Advertise.Windows
                 ButtonExportSelected.IsEnabled = true;
             }
         }
+        /// <summary>
+        /// Для генерации выбран отчет <c>CAC</c>
+        /// </summary>
         private void ComboBoxItem_Selected_CAC(object sender, RoutedEventArgs e)
         {
             SelectedGenerator = new CACReport(DB);
         }
-
+        /// <summary>
+        /// Для генерации выбран отчет <c>ROMI</c>
+        /// </summary>
         private void ComboBoxItem_Selected_ROMI(object sender, RoutedEventArgs e)
         {
             SelectedGenerator = new ROMIReport(DB);
         }
-
+        /// <summary>
+        /// Для генерации выбран отчет <c>AOV</c>
+        /// </summary>
         private void ComboBoxItem_Selected_AOV(object sender, RoutedEventArgs e)
         {
             SelectedGenerator = new AOVReport(DB);
         }
-
+        /// <summary>
+        /// Вывод таблицы отчёта при выборе элемнта списка
+        /// </summary>
         private void ListBoxMonthSelector_Selected(object sender, RoutedEventArgs e)
         {
             SetUpReport();
         }
-
+        /// <summary>
+        /// Очистка выбранных элементов при смене типа отчета
+        /// </summary>
         private void ComboBoxReportType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBoxMonthSelector.SelectedIndex = -1;
@@ -80,14 +82,14 @@ namespace Advertise.Windows
         }
         /// <summary>
         /// Нажатие на кнопку создания отчёта
-        /// </summary>=
+        /// </summary>
         private void ButtonExportSelected_Click(object sender, RoutedEventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog()) /// Создание диалога для сохранения файла
             {
                 string selectedMonth = ((ListBoxItem)ListBoxMonthSelector.SelectedItem).Content.ToString();
                 SelectedGenerator.Month = selectedMonth;
-                DataTable exp = SelectedGenerator.GenerateReoport();
+                DataTable exp = SelectedGenerator.GenerateReoport();  /// Создание отчета
                 saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
                 saveFileDialog.FilterIndex = 1;
                 saveFileDialog.RestoreDirectory = true;
@@ -97,11 +99,16 @@ namespace Advertise.Windows
                 {
                     try
                     {
-                        EW.ExportTable(exp, saveFileDialog.FileName);
+                        Cursor = System.Windows.Input.Cursors.Wait;
+                        EW.ExportTable(exp, saveFileDialog.FileName); /// Вывод отчёта
                     }
                     catch (Exception ex)
                     {
                         System.Windows.MessageBox.Show(ex.Message, "Ошибка экспортирования");
+                    }
+                    finally
+                    {
+                        Cursor = System.Windows.Input.Cursors.Arrow;
                     }
                     System.Windows.MessageBox.Show("Экспорт завершен!");
                 }

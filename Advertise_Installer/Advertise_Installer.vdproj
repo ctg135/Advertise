@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_02249C2116ED4B8A912E0718669A2C2A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_12DFE02858FD4295B8E19ABA849D35EF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -99,14 +93,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F6F28FC4BC1E720973697AE127498CC9"
-        "OwnerKey" = "8:_12DFE02858FD4295B8E19ABA849D35EF"
+        "MsmKey" = "8:_DEE8EF8475784FD5BB8E950DC3A52BD6"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3D8AA5EB52DEEA32A8F0DA6626401457"
+        "MsmKey" = "8:_F6F28FC4BC1E720973697AE127498CC9"
+        "OwnerKey" = "8:_12DFE02858FD4295B8E19ABA849D35EF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -157,6 +151,12 @@
         "OwnerKey" = "8:_8962D02F4F92DDDD74F0C52057E8C97D"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3D8AA5EB52DEEA32A8F0DA6626401457"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -175,6 +175,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -191,6 +199,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -220,26 +244,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02249C2116ED4B8A912E0718669A2C2A"
-            {
-            "SourcePath" = "8:..\\..\\Advertise - База данных\\advertise.sql"
-            "TargetName" = "8:advertise.sql"
-            "Tag" = "8:"
-            "Folder" = "8:_917649691F9F4EE8AA48AD31B6ACCDAF"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_229795D2C1BFB7612D1B4C179D304E41"
             {
             "AssemblyRegister" = "3:1"
@@ -475,6 +479,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DEE8EF8475784FD5BB8E950DC3A52BD6"
+            {
+            "SourcePath" = "8:advertise.sql"
+            "TargetName" = "8:advertise.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_917649691F9F4EE8AA48AD31B6ACCDAF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F6F28FC4BC1E720973697AE127498CC9"
@@ -729,7 +753,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_02249C2116ED4B8A912E0718669A2C2A"
+            "Target" = "8:_DEE8EF8475784FD5BB8E950DC3A52BD6"
             "Folder" = "8:_8868784EE64D4F46883E7B760C61DA57"
             "WorkingFolder" = "8:_917649691F9F4EE8AA48AD31B6ACCDAF"
             "Icon" = "8:"
