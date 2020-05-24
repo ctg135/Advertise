@@ -78,10 +78,12 @@ namespace Advertise.Windows
             grid.ItemsSource = null;
             SetUpReport();
         }
-
+        /// <summary>
+        /// Нажатие на кнопку создания отчёта
+        /// </summary>=
         private void ButtonExportSelected_Click(object sender, RoutedEventArgs e)
         {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog()) /// Создание диалога для сохранения файла
             {
                 string selectedMonth = ((ListBoxItem)ListBoxMonthSelector.SelectedItem).Content.ToString();
                 SelectedGenerator.Month = selectedMonth;

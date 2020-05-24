@@ -2,8 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Advertise.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="connectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Server=localhost;Database=advertise;User Id=root;Pwd=;convert zero datetime=True;</Value>
+    <Setting Name="Server" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="Database" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">advertise</Value>
+    </Setting>
+    <Setting Name="DateTimeValue" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

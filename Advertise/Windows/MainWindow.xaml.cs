@@ -66,6 +66,10 @@ namespace Advertise.Windows
             TableSelector.ItemsSource = DB.GetTableNames().Values;
             stater = new StateControllerMainWindow(this);
         }
+        public MainWindow()
+        {
+
+        }
         /// <summary>
         /// Функция для устаовки таблицы данных
         /// </summary>
@@ -168,11 +172,11 @@ namespace Advertise.Windows
             TableRefreshing(this, e);
         }
         /// <summary>
-        /// 
+        /// Нажатие кнопки изменения записи
         /// </summary>
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
-            switch (TableNames[TableSelector.Text])
+            switch (TableNames[TableSelector.Text]) /// Определение выбранной таблицы и вывод соответсвующей формы редактирования
             {
                 case "source":
                     Models.Source source = (Models.Source)grid.SelectedItem;
@@ -223,16 +227,25 @@ namespace Advertise.Windows
             }
         }
         /// <summary>
-        /// 
+        /// Нажатие на кнопку создания отчета
         /// </summary>
         private void ButtonReport_Click(object sender, RoutedEventArgs e)
         {
             new ReportWindow(DB, excelWorker).ShowDialog();
         }
-
+        /// <summary>
+        /// Открытие окна составления подробного отчёта
+        /// </summary>
         private void ButtonReportTotal_Click(object sender, RoutedEventArgs e)
         {
             new TotalReportWIndow(DB, excelWorker).ShowDialog();
+        }
+        /// <summary>
+        /// Событие закрытия окна
+        /// </summary>
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            App.Current.Shutdown(); // Закрытие приложения
         }
     }
 

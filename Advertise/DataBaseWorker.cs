@@ -35,6 +35,10 @@ namespace Advertise
         {
             connection = new MySqlConnection(ConnectionString);
         }
+        public DataBaseWorker()
+        {
+            connection = new MySqlConnection();
+        }
         /// <summary>
         /// Функция выполения запроса к базе данных
         /// </summary>

@@ -18,48 +18,26 @@ namespace Advertise
         ExcelWorker excelWorker;
         public App()
         {
-            dbworker = new DataBaseWorker(Advertise.Properties.Settings.Default.connectionString);
-            if (CheckConnectionWithDB())
+            dbworker = new DataBaseWorker();
+            MainWindow = new Windows.MainWindow();
+            var res = new Windows.AuthorizationWindow( /// Отображения окна авторизации
+                dbworker,
+                Advertise.Properties.Settings.Default.Server,
+                Advertise.Properties.Settings.Default.Database,
+                Advertise.Properties.Settings.Default.DateTimeValue                
+            ).ShowDialog();
+            if (res) /// Если авторизация пройдена
             {
                 synchronizer = new DataBaseSynchronizer(dbworker);
                 excelWorker = new ExcelWorker(synchronizer);
-                new Windows.MainWindow(synchronizer, excelWorker).Show();
+                var main = new Windows.MainWindow(synchronizer, excelWorker);
+                MainWindow = main;
+                MainWindow.Show();
             }
             else
             {
                 Current.Shutdown();
             }
-
-        }
-        /// <summary>
-        /// Функция для проверки подключения к базе данных<br></br>
-        /// При ошибке подключеният требует выводит MessageBox до тех пор, пока не подключится или закрывает приложение
-        /// </summary>
-        private bool CheckConnectionWithDB()
-        {
-            bool retry;
-            bool success = false;
-            do
-            {
-                retry = false;
-                try
-                {
-                    success = dbworker.CheckConnection();
-                }
-                catch (Exception ex)
-                {
-                    switch (MessageBox.Show(ex.Message + "\nНажмите \"Да\" для потворного подключения", "Ошибка подключения", MessageBoxButton.YesNo, MessageBoxImage.Error))
-                    {
-                        case MessageBoxResult.Yes:
-                            retry = true;
-                            break;
-                        case MessageBoxResult.No:
-                            retry = false;
-                            break;
-                    }
-                }
-            } while (retry);
-            return success;
         }
     }
 }
